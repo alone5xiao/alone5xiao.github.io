@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hamal</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2018-03-10T07:36:26.883Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>搬运工</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>网站的渗透测试思路</title>
+    <link href="http://yoursite.com/2018/03/10/%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF/"/>
+    <id>http://yoursite.com/2018/03/10/网站的渗透测试思路/</id>
+    <published>2018-03-10T05:15:05.000Z</published>
+    <updated>2018-03-10T07:36:26.883Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）<br>2、网站指纹识别（包括，cms，cdn，证书等），dns记录<br>3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）<br>4、子域名收集，旁站查询(有授权可渗透)，C段等<br><a id="more"></a><br>5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等<br>6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等<br>7、传输协议，通用漏洞，exp，github源码等</p><h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><p>1、浏览网站，看看网站规模，功能，特点等<br>2、端口，弱口令，目录等扫描<br>3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等</p><h3 id="漏洞利用-权限提升"><a href="#漏洞利用-权限提升" class="headerlink" title="漏洞利用 | 权限提升"></a>漏洞利用 | 权限提升</h3><h4 id="SQL注入，XSS，CSRF等"><a href="#SQL注入，XSS，CSRF等" class="headerlink" title="SQL注入，XSS，CSRF等"></a>SQL注入，XSS，CSRF等</h4><p><strong>SQL注入原理</strong><br>1、SQL（结构化语句查询）<br>2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理<br>3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等<br><strong>SQL注入，注入方法</strong><br>1、如果是get型号，直接，sqlmap-u “注入点URL”<br>2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”<br>3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”<br><strong>XSS原理</strong><br>网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行<br><strong>XSS常见攻击语句</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"&gt;<span class="tag">&lt;<span class="name">BODY</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">svg</span> /<span class="attr">onload</span>=<span class="string">prompt(1)</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">IMG</span> <span class="attr">SRC</span>=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" "</span>=<span class="string">" "</span><span class="attr">onerror</span>=<span class="string">"alert('xss')"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">alert(document.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br></pre></td></tr></table></figure></p><h4 id="mysql提权，serv-u提权，linux内核版本提权等"><a href="#mysql提权，serv-u提权，linux内核版本提权等" class="headerlink" title="mysql提权，serv-u提权，linux内核版本提权等"></a>mysql提权，serv-u提权，linux内核版本提权等</h4><h3 id="清除测试数据-输出报告"><a href="#清除测试数据-输出报告" class="headerlink" title="清除测试数据 | 输出报告"></a>清除测试数据 | 输出报告</h3><p>1、日志、测试数据的清理<br>2、总结，输出渗透测试报告，附修复方案</p><h3 id="复测"><a href="#复测" class="headerlink" title="复测"></a>复测</h3><p>1、验证并发现是否有新漏洞，输出报告，归档</p><h3 id="网络安全事件应急响应"><a href="#网络安全事件应急响应" class="headerlink" title="网络安全事件应急响应"></a>网络安全事件应急响应</h3><p>1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；<br>2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）<br>3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等<br>4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;信息收集&quot;&gt;&lt;a href=&quot;#信息收集&quot; class=&quot;headerlink&quot; title=&quot;信息收集&quot;&gt;&lt;/a&gt;信息收集&lt;/h3&gt;&lt;p&gt;1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）&lt;br&gt;2、网站指纹识别（包括，cms，cdn，证书等），dns记录&lt;br&gt;3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）&lt;br&gt;4、子域名收集，旁站查询(有授权可渗透)，C段等&lt;br&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>网络代理工具</title>
+    <link href="http://yoursite.com/2018/03/09/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/"/>
+    <id>http://yoursite.com/2018/03/09/网络代理工具/</id>
+    <published>2018-03-09T13:12:22.000Z</published>
+    <updated>2018-03-10T07:05:47.952Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="windows、linux代理"><a href="#windows、linux代理" class="headerlink" title="windows、linux代理"></a>windows、linux代理</h3><p>Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：<a href="http://rootkiter.com/EarthWorm/" target="_blank" rel="noopener">http://rootkiter.com/EarthWorm/</a><br><a id="more"></a><br>使用Proxifier配合简单完成。Proxifier使用教程：<a href="https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html</a><br>现在可以上Google了。<br><img src="/images/3、1.png" alt="" title="描述"></p><h3 id="socks5代理"><a href="#socks5代理" class="headerlink" title="socks5代理"></a>socks5代理</h3><p>这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br>执行命令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python /var/www/html/s5.py <span class="number">8082</span></span><br></pre></td></tr></table></figure></p><p><img src="/images/3、2.png" alt=""><br>使用Proxifier代理成功。<br><img src="/images/3、4.png" alt=""><br><img src="/images/3、3.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;windows、linux代理&quot;&gt;&lt;a href=&quot;#windows、linux代理&quot; class=&quot;headerlink&quot; title=&quot;windows、linux代理&quot;&gt;&lt;/a&gt;windows、linux代理&lt;/h3&gt;&lt;p&gt;Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：&lt;a href=&quot;http://rootkiter.com/EarthWorm/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;http://rootkiter.com/EarthWorm/&lt;/a&gt;&lt;br&gt;
+    
+    </summary>
+    
+      <category term="网络代理" scheme="http://yoursite.com/categories/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86/"/>
+    
+    
+      <category term="网络代理" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网页过狗一句话客户端</title>
+    <link href="http://yoursite.com/2018/02/28/%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+    <id>http://yoursite.com/2018/02/28/网页过狗一句话客户端/</id>
+    <published>2018-02-28T13:27:42.000Z</published>
+    <updated>2018-03-04T14:17:47.268Z</updated>
+    
+    <content type="html"><![CDATA[<p>在很多网站都有安全狗，用菜刀连接总是失败。。<br><a id="more"></a><br><img src="/images/2、1.png" alt=""><br>用网页一句话客户端绕过安全狗拦截。下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br><img src="/images/2、2.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在很多网站都有安全狗，用菜刀连接总是失败。。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="一句话木马" scheme="http://yoursite.com/categories/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
+    
+    
+      <category term="一句话木马" scheme="http://yoursite.com/tags/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拿Webshell小技巧</title>
+    <link href="http://yoursite.com/2018/02/24/%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>http://yoursite.com/2018/02/24/拿Webshell小技巧/</id>
+    <published>2018-02-24T11:52:43.000Z</published>
+    <updated>2018-03-01T13:13:02.337Z</updated>
+    
+    <content type="html"><![CDATA[<p>用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。<br><a id="more"></a><br><img src="/images/1、1.png" alt=""><br>用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。<br><img src="/images/1、2.png" alt=""><br>用google搜索一波,拿到绝对路径<br><img src="/images/1、3.png" alt=""><br>现在有绝对路径，可以写入shell了。<br><img src="/images/1、4.png" alt=""><br>还是system权限，不错不错。。。<br><img src="/images/1、5.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。&lt;br&gt;
+    
+    </summary>
+    
+      <category term="Webshell" scheme="http://yoursite.com/categories/Webshell/"/>
+    
+    
+      <category term="Webshell" scheme="http://yoursite.com/tags/Webshell/"/>
+    
+  </entry>
+  
+</feed>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[网站的渗透测试思路]]></title>
+    <url>%2F2018%2F03%2F10%2F%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[信息收集1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）2、网站指纹识别（包括，cms，cdn，证书等），dns记录3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）4、子域名收集，旁站查询(有授权可渗透)，C段等5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等7、传输协议，通用漏洞，exp，github源码等 漏洞挖掘1、浏览网站，看看网站规模，功能，特点等2、端口，弱口令，目录等扫描3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等 漏洞利用 | 权限提升SQL注入，XSS，CSRF等SQL注入原理1、SQL（结构化语句查询）2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等SQL注入，注入方法1、如果是get型号，直接，sqlmap-u “注入点URL”2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”XSS原理网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行XSS常见攻击语句12345"&gt;&lt;BODY&gt;&lt;""&gt;&lt;svg /onload=prompt(1)&gt;&lt;""&gt;&lt;IMG SRC="javascript:alert('XSS');"&gt;&lt;""&gt;&lt;img src=" "=" "onerror="alert('xss')"&gt;&lt;""&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;" mysql提权，serv-u提权，linux内核版本提权等清除测试数据 | 输出报告1、日志、测试数据的清理2、总结，输出渗透测试报告，附修复方案 复测1、验证并发现是否有新漏洞，输出报告，归档 网络安全事件应急响应1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[网络代理工具]]></title>
+    <url>%2F2018%2F03%2F09%2F%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%2F</url>
+    <content type="text"><![CDATA[windows、linux代理Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：http://rootkiter.com/EarthWorm/使用Proxifier配合简单完成。Proxifier使用教程：https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html现在可以上Google了。 socks5代理这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：https://github.com/alone5xiao/hamal.cc执行命令：1Python /var/www/html/s5.py 8082 使用Proxifier代理成功。]]></content>
+      <categories>
+        <category>网络代理</category>
+      </categories>
+      <tags>
+        <tag>网络代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网页过狗一句话客户端]]></title>
+    <url>%2F2018%2F02%2F28%2F%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF%2F</url>
+    <content type="text"><![CDATA[在很多网站都有安全狗，用菜刀连接总是失败。。用网页一句话客户端绕过安全狗拦截。下载地址：https://github.com/alone5xiao/hamal.cc]]></content>
+      <categories>
+        <category>一句话木马</category>
+      </categories>
+      <tags>
+        <tag>一句话木马</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[拿Webshell小技巧]]></title>
+    <url>%2F2018%2F02%2F24%2F%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。用google搜索一波,拿到绝对路径现在有绝对路径，可以写入shell了。还是system权限，不错不错。。。]]></content>
+      <categories>
+        <category>Webshell</category>
+      </categories>
+      <tags>
+        <tag>Webshell</tag>
+      </tags>
+  </entry>
+</search>
