@@ -1,95 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-    
-    <entry>
-      <title>用sqlmap粗暴地绕过waf</title>
-      <link href="/2018/03/21/%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf/"/>
-      <content type="html"><![CDATA[<p>许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……<br><a id="more"></a><br><img src="/images/4.1.jpg" alt="" title="linux下tamper脚本位置"><br><img src="/images/4.2.jpg" alt="" title="win下tamper脚本位置"><br>但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done;</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.3.jpg" alt=""><br>说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。<br>如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmapamper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.4.jpg" alt=""><br>当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。<br>原文地址:<a href="https://www.toutiao.com/i6527560237581337091/" target="_blank" rel="noopener">https://www.toutiao.com/i6527560237581337091/</a></p>]]></content>
-      
+<search>
+  <entry>
+    <title><![CDATA[用sqlmap粗暴地绕过waf]]></title>
+    <url>%2F2018%2F03%2F21%2F%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf%2F</url>
+    <content type="text"><![CDATA[许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：1for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done; 说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：1for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmap amper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10 当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。原文地址:https://www.toutiao.com/i6527560237581337091/]]></content>
       <categories>
-          
-          <category> sqlmap </category>
-          
+        <category>sqlmap</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> sqlmap </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>网站的渗透测试思路</title>
-      <link href="/2018/03/10/%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF/"/>
-      <content type="html"><![CDATA[<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）<br>2、网站指纹识别（包括，cms，cdn，证书等），dns记录<br>3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）<br>4、子域名收集，旁站查询(有授权可渗透)，C段等<br><a id="more"></a><br>5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等<br>6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等<br>7、传输协议，通用漏洞，exp，github源码等</p><h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><p>1、浏览网站，看看网站规模，功能，特点等<br>2、端口，弱口令，目录等扫描<br>3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等</p><h3 id="漏洞利用-权限提升"><a href="#漏洞利用-权限提升" class="headerlink" title="漏洞利用 | 权限提升"></a>漏洞利用 | 权限提升</h3><h4 id="SQL注入，XSS，CSRF等"><a href="#SQL注入，XSS，CSRF等" class="headerlink" title="SQL注入，XSS，CSRF等"></a>SQL注入，XSS，CSRF等</h4><p><strong>SQL注入原理</strong><br>1、SQL（结构化语句查询）<br>2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理<br>3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等<br><strong>SQL注入，注入方法</strong><br>1、如果是get型号，直接，sqlmap-u “注入点URL”<br>2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”<br>3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”<br><strong>XSS原理</strong><br>网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行<br><strong>XSS常见攻击语句</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"&gt;<span class="tag">&lt;<span class="name">BODY</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">svg</span> /<span class="attr">onload</span>=<span class="string">prompt(1)</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">IMG</span> <span class="attr">SRC</span>=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" "</span>=<span class="string">" "</span><span class="attr">onerror</span>=<span class="string">"alert('xss')"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">alert(document.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br></pre></td></tr></table></figure></p><h4 id="mysql提权，serv-u提权，linux内核版本提权等"><a href="#mysql提权，serv-u提权，linux内核版本提权等" class="headerlink" title="mysql提权，serv-u提权，linux内核版本提权等"></a>mysql提权，serv-u提权，linux内核版本提权等</h4><h3 id="清除测试数据-输出报告"><a href="#清除测试数据-输出报告" class="headerlink" title="清除测试数据 | 输出报告"></a>清除测试数据 | 输出报告</h3><p>1、日志、测试数据的清理<br>2、总结，输出渗透测试报告，附修复方案</p><h3 id="复测"><a href="#复测" class="headerlink" title="复测"></a>复测</h3><p>1、验证并发现是否有新漏洞，输出报告，归档</p><h3 id="网络安全事件应急响应"><a href="#网络安全事件应急响应" class="headerlink" title="网络安全事件应急响应"></a>网络安全事件应急响应</h3><p>1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；<br>2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）<br>3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等<br>4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录</p>]]></content>
-      
-      
-    </entry>
-    
-    <entry>
-      <title>网络代理工具</title>
-      <link href="/2018/03/09/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/"/>
-      <content type="html"><![CDATA[<h3 id="windows、linux代理"><a href="#windows、linux代理" class="headerlink" title="windows、linux代理"></a>windows、linux代理</h3><p>Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：<a href="http://rootkiter.com/EarthWorm/" target="_blank" rel="noopener">http://rootkiter.com/EarthWorm/</a><br><a id="more"></a><br>使用Proxifier配合简单完成。Proxifier使用教程：<a href="https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html</a><br>现在可以上Google了。<br><img src="/images/3、1.png" alt="" title="IP地址"></p><h3 id="socks5代理"><a href="#socks5代理" class="headerlink" title="socks5代理"></a>socks5代理</h3><p>这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br>执行命令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python /var/www/html/s5.py <span class="number">8082</span></span><br></pre></td></tr></table></figure></p><p><img src="/images/3、2.png" alt=""><br>使用Proxifier代理成功。<br><img src="/images/3、4.png" alt=""><br><img src="/images/3、3.png" alt=""></p>]]></content>
-      
+      <tags>
+        <tag>sqlmap</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网站的渗透测试思路]]></title>
+    <url>%2F2018%2F03%2F10%2F%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF%2F</url>
+    <content type="text"><![CDATA[信息收集1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）2、网站指纹识别（包括，cms，cdn，证书等），dns记录3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）4、子域名收集，旁站查询(有授权可渗透)，C段等5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等7、传输协议，通用漏洞，exp，github源码等 漏洞挖掘1、浏览网站，看看网站规模，功能，特点等2、端口，弱口令，目录等扫描3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等 漏洞利用 | 权限提升SQL注入，XSS，CSRF等SQL注入原理1、SQL（结构化语句查询）2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等SQL注入，注入方法1、如果是get型号，直接，sqlmap-u “注入点URL”2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”XSS原理网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行XSS常见攻击语句12345"&gt;&lt;BODY&gt;&lt;""&gt;&lt;svg /onload=prompt(1)&gt;&lt;""&gt;&lt;IMG SRC="javascript:alert('XSS');"&gt;&lt;""&gt;&lt;img src=" "=" "onerror="alert('xss')"&gt;&lt;""&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;" mysql提权，serv-u提权，linux内核版本提权等清除测试数据 | 输出报告1、日志、测试数据的清理2、总结，输出渗透测试报告，附修复方案 复测1、验证并发现是否有新漏洞，输出报告，归档 网络安全事件应急响应1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[网络代理工具]]></title>
+    <url>%2F2018%2F03%2F09%2F%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%2F</url>
+    <content type="text"><![CDATA[windows、linux代理Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：http://rootkiter.com/EarthWorm/使用Proxifier配合简单完成。Proxifier使用教程：https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html现在可以上Google了。 socks5代理这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：https://github.com/alone5xiao/hamal.cc执行命令：1Python /var/www/html/s5.py 8082 使用Proxifier代理成功。]]></content>
       <categories>
-          
-          <category> 网络代理 </category>
-          
+        <category>网络代理</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 网络代理 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>网页过狗一句话客户端</title>
-      <link href="/2018/02/28/%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
-      <content type="html"><![CDATA[<p>在很多网站都有安全狗，用菜刀连接总是失败。。<br><a id="more"></a><br><img src="/images/2、1.png" alt=""><br>用网页一句话客户端绕过安全狗拦截。下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br><img src="/images/2、2.png" alt=""></p>]]></content>
-      
+      <tags>
+        <tag>网络代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[网页过狗一句话客户端]]></title>
+    <url>%2F2018%2F02%2F28%2F%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF%2F</url>
+    <content type="text"><![CDATA[在很多网站都有安全狗，用菜刀连接总是失败。。用网页一句话客户端绕过安全狗拦截。下载地址：https://github.com/alone5xiao/hamal.cc]]></content>
       <categories>
-          
-          <category> 一句话木马 </category>
-          
+        <category>一句话木马</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 一句话木马 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>拿Webshell小技巧</title>
-      <link href="/2018/02/24/%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
-      <content type="html"><![CDATA[<p>用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。<br><a id="more"></a><br><img src="/images/1、1.png" alt=""><br>用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。<br><img src="/images/1、2.png" alt=""><br>用google搜索一波,拿到绝对路径<br><img src="/images/1、3.png" alt=""><br>现在有绝对路径，可以写入shell了。<br><img src="/images/1、4.png" alt=""><br>还是system权限，不错不错。。。<br><img src="/images/1、5.png" alt=""></p>]]></content>
-      
+      <tags>
+        <tag>一句话木马</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[拿Webshell小技巧]]></title>
+    <url>%2F2018%2F02%2F24%2F%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
+    <content type="text"><![CDATA[用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。用google搜索一波,拿到绝对路径现在有绝对路径，可以写入shell了。还是system权限，不错不错。。。]]></content>
       <categories>
-          
-          <category> Webshell </category>
-          
+        <category>Webshell</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Webshell </tag>
-            
-        </tags>
-      
-    </entry>
-    
-  
-  
+      <tags>
+        <tag>Webshell</tag>
+      </tags>
+  </entry>
 </search>
