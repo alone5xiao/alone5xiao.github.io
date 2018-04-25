@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="AV.initialize(&quot;K2syM2Bc9yk0f5x0r8XmVGbJ-gzGzoHsz&quot;, &quot;lsPKL8LoAVTbFkM0aKbB80de&quot;);    var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);//表名   query.notEqualTo(&apos;id&apos;,0); //id不为">
+<meta name="description" content="阅读榜   AV.initialize(&quot;KVNdpVifyFqJPx0bzSg6cN7z-gzGzoHsz&quot;, &quot;vlNRwqLbdUTKC1W06gjYj0iG&quot;);    var num=20   var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);   query.notEqualTo(&apos;">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hamal">
 <meta property="og:url" content="http://yoursite.com/count/index.html">
 <meta property="og:site_name" content="Hamal">
-<meta property="og:description" content="AV.initialize(&quot;K2syM2Bc9yk0f5x0r8XmVGbJ-gzGzoHsz&quot;, &quot;lsPKL8LoAVTbFkM0aKbB80de&quot;);    var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);//表名   query.notEqualTo(&apos;id&apos;,0); //id不为">
+<meta property="og:description" content="阅读榜   AV.initialize(&quot;KVNdpVifyFqJPx0bzSg6cN7z-gzGzoHsz&quot;, &quot;vlNRwqLbdUTKC1W06gjYj0iG&quot;);    var num=20   var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);   query.notEqualTo(&apos;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-03-06T03:45:17.376Z">
+<meta property="og:updated_time" content="2018-04-25T11:34:47.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hamal">
-<meta name="twitter:description" content="AV.initialize(&quot;K2syM2Bc9yk0f5x0r8XmVGbJ-gzGzoHsz&quot;, &quot;lsPKL8LoAVTbFkM0aKbB80de&quot;);    var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);//表名   query.notEqualTo(&apos;id&apos;,0); //id不为">
+<meta name="twitter:description" content="阅读榜   AV.initialize(&quot;KVNdpVifyFqJPx0bzSg6cN7z-gzGzoHsz&quot;, &quot;vlNRwqLbdUTKC1W06gjYj0iG&quot;);    var num=20   var time=0   var title=&quot;&quot;   var url=&quot;&quot;   var query = new AV.Query(&apos;Counter&apos;);   query.notEqualTo(&apos;">
 
 
 
@@ -288,24 +288,27 @@
       <div class="post-body">
         
         
-          <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-<script>AV.initialize("K2syM2Bc9yk0f5x0r8XmVGbJ-gzGzoHsz", "lsPKL8LoAVTbFkM0aKbB80de");</script>
+          <p><blockquote class="blockquote-center"><p>阅读榜</p><br></blockquote></p>
+<p></p><p></p><p align="justfly" id="heheda"><br></p><p></p><p></p>
+<script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+<script>AV.initialize("KVNdpVifyFqJPx0bzSg6cN7z-gzGzoHsz", "vlNRwqLbdUTKC1W06gjYj0iG");</script>
 <script type="text/javascript">
+  var num=20
   var time=0
   var title=""
   var url=""
-  var query = new AV.Query('Counter');//表名
-  query.notEqualTo('id',0); //id不为0的结果
-  query.descending('time'); //结果按阅读次数降序排序
-  query.limit(20);  //最终只返回10条结果
+  var query = new AV.Query('Counter');
+  query.notEqualTo('id',0);
+  query.descending('time');
+  query.limit(num);
   query.find().then(function (todo) {
-    for (var i=0;i<10;i++){ 
+    for (var i=0;i<num;i++){
       var result=todo[i].attributes;
-      time=result.time;  //阅读次数
-      title=result.title; //文章标题
-      url=result.url;     //文章url
-      var content="<p>"+"<font color='#0477ab'>"+"【阅读次数:"+time+"】"+"<a href='"+"http://thief.one"+url+"'>"+title+"</font>"+"</a>"+"</p>";
-      // document.write("<a href='"+"http://thief.one/"+url+"'>"+title+"</a>"+"    Readtimes:"+time+"<br>");
+      time=result.time;
+      title=result.title;
+      url=result.url;  
+      var content="<p>"+"<font color='#e20404'>"+"【热度"+time+"℃】"+"："+"<a href='"+"http://rcoil.me"+url+"'>"+title+"</font>"+"</a>"+"</p>";
+      //document.write("<a href='"+"http://rcoil.me"+url+"'>"+title+"</a>"+"    Readtimes:"+time+"<br>");
       document.getElementById("heheda").innerHTML+=content
     }
   }, function (error) {
