@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-07-31T12:58:01.636Z</updated>
+  <updated>2018-08-22T14:20:54.455Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>3层vps连接配置</title>
+    <link href="http://hamal.cc/2018/08/3%E5%B1%82vps%E8%BF%9E%E6%8E%A5%E9%85%8D%E7%BD%AE/"/>
+    <id>http://hamal.cc/2018/08/3层vps连接配置/</id>
+    <published>2018-08-22T13:25:38.000Z</published>
+    <updated>2018-08-22T14:20:54.455Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h3><p>简单说一下，用一台电脑做网关，电脑的流量只能从网关出去，另外模拟3台vps。<strong><a id="more"></a></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">网关：192.168.0.10</span><br><span class="line">vps1:192.168.3.131</span><br><span class="line">vps2:192.168.4.131</span><br><span class="line">vps3:192.168.5.131</span><br></pre></td></tr></table></figure></p><h3 id="网关（debian系统）"><a href="#网关（debian系统）" class="headerlink" title="网关（debian系统）"></a>网关（debian系统）</h3><p>安装shadowsocks客户端<br>配置/etc/shadowsocks/config.json文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;server&quot;:&quot;192.168.3.131&quot;,   //vps1的ip</span><br><span class="line">    &quot;server_port&quot;:6666,         //vps1的端口</span><br><span class="line">    &quot;local_address&quot;: &quot;0.0.0.0&quot;, //允许局域网内的ip连接</span><br><span class="line">    &quot;local_port&quot;:1080,          //端口</span><br><span class="line">    &quot;password&quot;:&quot;123456&quot;,        //连接shadowsocks的密码</span><br><span class="line">    &quot;timeout&quot;:300,</span><br><span class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,     //加密</span><br><span class="line">    &quot;fast_open&quot;: false,</span><br><span class="line">    &quot;workers&quot;: 1</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>启动shadowsocks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -c /etc/shadowsocks/config.json</span><br></pre></td></tr></table></figure></p><h3 id="vps1"><a href="#vps1" class="headerlink" title="vps1"></a>vps1</h3><p>将6666端口转发给vps2的7777端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 6666 -j DNAT --to-destination 192.168.4.131:7777</span><br><span class="line">iptables -t nat -A POSTROUTING -p tcp -d 192.168.4.131 --dport 7777 -j SNAT --to-source 192.168.3.131</span><br></pre></td></tr></table></figure></p><h3 id="vps2"><a href="#vps2" class="headerlink" title="vps2"></a>vps2</h3><p>将7777端口转发给vps3的8888端口。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A PREROUTING -p tcp --dport 7777 -j DNAT --to-destination 192.168.5.131:8888</span><br><span class="line">iptables -t nat -A POSTROUTING -p tcp -d 192.168.5.131 --dport 8888 -j SNAT --to-source 192.168.4.131</span><br></pre></td></tr></table></figure></p><h3 id="vps3"><a href="#vps3" class="headerlink" title="vps3"></a>vps3</h3><p>安装shadowsocks服务端<br>配置/etc/shadowsocks.json<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">&quot;server&quot;:&quot;192.168.5.131&quot;,   //vps3的ip</span><br><span class="line">&quot;server_port&quot;:8888,         //端口</span><br><span class="line">&quot;local_port&quot;:1080,</span><br><span class="line">&quot;password&quot;:&quot;123456&quot;,        //密码</span><br><span class="line">&quot;timeout&quot;:300,</span><br><span class="line">&quot;method&quot;:&quot;aes-256-cfb&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>启动shadowsocks<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssserver -c /etc/shadowsocks.json</span><br></pre></td></tr></table></figure></p><p>基本配置完成。</p><h3 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h3><p>使用Proxifier代理测试，填网关地址和端口。<br><img src="/images/15.1.png" alt=""><br>测试成功。<br><img src="/images/15.2.png" alt=""><br><strong>总结</strong><br>主要是网关连接vps1，然后转发给vps2，在转发给vps3，vps3接收转发的流量，这样3层vps连接就完成了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;基本信息&quot;&gt;&lt;a href=&quot;#基本信息&quot; class=&quot;headerlink&quot; title=&quot;基本信息&quot;&gt;&lt;/a&gt;基本信息&lt;/h3&gt;&lt;p&gt;简单说一下，用一台电脑做网关，电脑的流量只能从网关出去，另外模拟3台vps。&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="vps" scheme="http://hamal.cc/categories/vps/"/>
+    
+    
+      <category term="vps" scheme="http://hamal.cc/tags/vps/"/>
+    
+  </entry>
   
   <entry>
     <title>V2视频会议系统存在SQL注射、XXE漏洞(可getshell)</title>
