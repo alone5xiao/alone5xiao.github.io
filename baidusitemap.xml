@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://hamal.cc/2018/10/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8FIPC-%E5%BC%B9shell/</loc>
+    <lastmod>2018-10-05T05:44:16.929Z</lastmod>
+    <data>
+        <display>
+        <title>内网渗透IPC$弹shell</title>
+        <pubTime>2018-10-04T05:35:14.000Z</pubTime>
+        
+        <tag>内网渗透</tag>
+         
+         
+           
+             
+              <breadCrumb title="内网渗透" url="http://hamal.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://hamal.cc/2018/09/%E6%9C%A8%E9%A9%AC%E5%85%8D%E6%9D%80%E5%85%8D%E6%9D%80/</loc>
-    <lastmod>2018-09-26T13:49:32.464Z</lastmod>
+    <lastmod>2018-09-26T13:51:58.629Z</lastmod>
     <data>
         <display>
         <title>木马免杀免杀</title>
